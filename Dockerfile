@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies (npm ci is faster and more reliable for CI/CD and Docker)
-RUN npm ci
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
