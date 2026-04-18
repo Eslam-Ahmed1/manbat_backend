@@ -1,4 +1,4 @@
-import { request } from 'express';
+import { request, Response, Request, NextFunction } from 'express';
 import { authenticationService } from '../services/index.ts'
 import validate from '../middlewares/validationRequestMiddleware.ts';
 import { loginSchema, registerSchema } from '../schemas/authentication.ts';
@@ -32,7 +32,7 @@ const login: typeof loginmiddleware = async (req, res, next) => {
         next(err)
     }
 }
-const user = async (req, res, next) => {
+const user = async (req: Request, res: Response, next: NextFunction) => {
     try {
         //i need get this user from database by using unique email
         let user = req.user;

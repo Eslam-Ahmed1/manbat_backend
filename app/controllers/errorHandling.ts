@@ -1,8 +1,7 @@
 import { appError } from "../../utils/appErrors.ts"
 import express from 'express'
 import { detectError } from "../services/detectError.ts";
-import { object } from "zod";
-const errorHandling = (err, req: express.Request, res: express.Response, next: express.NextFunction) => {
+const errorHandling = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     err=detectError(err);
     console.error("Error log", err.stack)
     if (err instanceof appError)

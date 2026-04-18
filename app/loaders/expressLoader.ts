@@ -15,7 +15,7 @@ let serverSetup = (async () => {
     app.use(CORS());
     app.use('/api/authentication', AuthenticationRoute)
     app.use('/api/AI_chat', ChatRoute)
-    app.use(errorHandling)
+    app.use(errorHandling as express.ErrorRequestHandler)
     let server = app.listen(process.env.PORT, () => {
         console.log('server connect sucessfully');
     })

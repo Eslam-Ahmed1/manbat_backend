@@ -1,12 +1,26 @@
 import Message from "../models/messages.ts";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Chat from "../models/chats.ts";
+import { appError } from "../../utils/appErrors.ts";
 //this not completed so far
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" })
-const send_message = async (chatDTO) => {
+interface chatDTO {
+    chat_id: string,
+    content: string
+}
+interface userDTO {
+    _id: string
+}
+const send_message = async (chatDTO: chatDTO) => {
     const chatId = chatDTO.chat_id;
     const content = chatDTO.content;
+
+    const chatExists = await Chat.findById(chatId);
+    if (!chatExists) {
+        throw new appError("Chat not found", 404);
+    }
+
     const userMessage = new Message({
         chat_id: chatId,
         sender: 'user',
@@ -38,7 +52,7 @@ const send_message = async (chatDTO) => {
     //we need to provide this messages to Ai 
     return AiText;
 }
-const new_chat = async (userDTO) => {
+const new_chat = async (userDTO: userDTO) => {
     const userId = userDTO._id;
     const newChat = new Chat({
         user_id: userId

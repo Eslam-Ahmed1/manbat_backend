@@ -3,7 +3,16 @@ import JWT from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { appError } from '../../utils/appErrors.ts';
 //recieve Data transfer object for security and intention
-const register = async (userDTO) => {
+interface userDTO {
+    name: string,
+    email: string,
+    password: string
+}
+interface loginDTO {
+    email: string,
+    password: string
+}
+const register = async (userDTO: userDTO) => {
     const { name, email, password } = userDTO;
     let userExist = await User.findOne({ email: email });
     if (userExist) {
@@ -18,33 +27,39 @@ const register = async (userDTO) => {
         name: savedUser.name,
         email: savedUser.email
     };
+
+    if (!process.env.SECRET_TOKEN) {
+        throw new appError('Server configuration error: Missing secret token', 500);
+    }
+
     const token = JWT.sign(
         payload,
-        process.env.secret_token as string,
+        process.env.SECRET_TOKEN as string,
         { expiresIn: '5d' }
     )
     return token
 }
-const login = async (loginDTO) => {
+const login = async (loginDTO: loginDTO) => {
     const { email, password } = loginDTO;
     const user = await User.findOne({ email: email });
     const isMatch = user && await bcrypt.compare(password, user.password);
     if (user && isMatch) {
-        if (user instanceof User) {
-            console.log(typeof user.toJSON());
-            const payload = {
-                _id: user._id,
-                name: user.name,
-                email: user.email
-            };
-            const token = JWT.sign(
-                payload,
-                process.env.secret_token as string,
-                { expiresIn: '5d' }
-                //use jwt to make token for this user 
-            )
-            return token;
+        const payload = {
+            _id: user._id,
+            name: user.name,
+            email: user.email
+        };
+
+        if (!process.env.SECRET_TOKEN) {
+            throw new appError('Server configuration error: Missing secret token', 500);
         }
+
+        const token = JWT.sign(
+            payload,
+            process.env.SECRET_TOKEN as string,
+            { expiresIn: '5d' }
+        );
+        return token;
     }
     else {
         throw new appError('Email or Password Incorrect', 401)

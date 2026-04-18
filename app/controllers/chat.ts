@@ -2,18 +2,23 @@ import Message from "../models/messages.ts";
 import Chat from "../models/chats.ts";
 import { chatService } from "../services/index.ts";
 import { appError } from "../../utils/appErrors.ts";
-const send_message = async (req, res, next) => {
+import { Request, Response, NextFunction } from "express";
+interface IchatDTO {
+    chat_id: string,
+    content: string
+}
+const send_message = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const chatDTO = {
             chat_id: req.params.chat_id,
             content: req.body.content
         }
-        const AiText = await chatService.send_message(chatDTO);
+        const AiText = await chatService.send_message(chatDTO as IchatDTO);
         return res.status(200).json({ aiMessage: AiText });
     }
     catch (err) { next(err) }
 }
-const messages = async (req, res, next) => {
+const messages = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const chatId = req.params.chat_id;
         const userId=req.user._id;
@@ -24,7 +29,7 @@ const messages = async (req, res, next) => {
     }
     catch (err) { next(err) }
 }
-const new_chat = async (req, res, next) => {
+const new_chat = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userDTO = {
             _id: req.user._id
@@ -34,7 +39,7 @@ const new_chat = async (req, res, next) => {
     }
     catch (err) { next(err) }
 }
-const chat_ids = async (req, res, next) => {
+const chat_ids = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = req.user._id;
         //newest chat first in sidebar
