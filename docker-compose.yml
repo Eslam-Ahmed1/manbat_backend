@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: manbut-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      # This overrides the MONGO_URL in your .env file to route to the database container
+      - MONGO_URL=mongodb://db:27017/manbut
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    container_name: manbut-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

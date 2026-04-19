@@ -17,6 +17,7 @@
     "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.10",
     "bcrypt": "^6.0.0",
+    "cloudinary": "^2.2.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "err-fixit": "^1.0.1",
@@ -26,11 +27,14 @@
     "multer": "^2.1.1",
     "nodemon": "^3.1.11",
     "socket.io": "^4.8.3",
+    "streamifier": "^0.1.1",
     "tsx": "^4.7.0",
     "zod": "^4.3.6",
     "zod-validation-error": "^5.0.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.1.0",
+    "@types/streamifier": "^0.1.2"
   }
 }

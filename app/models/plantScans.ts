@@ -16,15 +16,15 @@ let plantScanSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    //plant status after scaned infected or healthy 
-    status: {
-        type: String,
-        required: true
+    //plant status after scaned 
+    status: { type: String, 
+        default: 'completed', 
+        enum: ['pending', 'completed', 'failed'] 
     },
     //this property instead of make scan_disease schema
-    disease_ids:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'disease'
+    disease_ids: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'disease'
     }]
 })
 const PlantScan = mongoose.model('plantScan', plantScanSchema);

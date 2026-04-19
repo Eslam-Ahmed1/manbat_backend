@@ -2,7 +2,7 @@ import Message from "../models/messages.ts";
 import Chat from "../models/chats.ts";
 import { chatService } from "../services/index.ts";
 import { appError } from "../../utils/appErrors.ts";
-import { Request, Response, NextFunction } from "express";
+import { type Request,type Response, type NextFunction } from "express";
 interface IchatDTO {
     chat_id: string,
     content: string
