@@ -1,4 +1,4 @@
-import express, { RequestHandler } from "express";
+import express, {type RequestHandler } from "express";
 import Authorization from "../middlewares/authMiddleware.ts";
 import { chatController } from "../controllers/index.ts";
 const route = express.Router();

@@ -1,4 +1,4 @@
-import express, { RequestHandler } from 'express'
+import express, {type RequestHandler } from 'express'
 import { authenticationController } from '../controllers/index.ts';
 import Authorization from '../middlewares/authMiddleware.ts'
 import { loginSchema, registerSchema } from '../schemas/authentication.ts'

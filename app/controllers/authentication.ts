@@ -1,4 +1,4 @@
-import { request, Response, Request, NextFunction } from 'express';
+import {type request, type Response,type Request,type NextFunction } from 'express';
 import { authenticationService } from '../services/index.ts'
 import validate from '../middlewares/validationRequestMiddleware.ts';
 import { loginSchema, registerSchema } from '../schemas/authentication.ts';
