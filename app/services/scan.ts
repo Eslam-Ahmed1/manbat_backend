@@ -40,9 +40,10 @@ const analyzePlantImage = async (userId: string, imageBuffer: Buffer, mimeType: 
     try {
         const model = getAIModel();
         const prompt = `
-        Analyze this plant image. Identify any diseases present. 
-        Return a JSON array of objects, where each object has a 'name' (string) and 'description' (string) of the disease.
-        If the plant is healthy, return an empty array [].
+      Analyze this plant image and identify any diseases present. Return a strictly formatted JSON array of objects with the following keys:
+- 'name' (string): A single, standardized common name of the disease. Do NOT include alternative names, parentheses, or words like 'likely', 'possibly', or 'or' in this field.
+- 'description' (string): A brief description of the disease and symptoms. You may include specific variants, alternative names, or uncertainties here.
+If the plant is completely healthy, return an empty array [].
         `;
         const imagePart = {
             inlineData: {
