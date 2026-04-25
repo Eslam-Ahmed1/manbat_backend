@@ -1,21 +1,27 @@
-import mongoose from "mongoose"
-let treatmentsSchema = new mongoose.Schema({
-    disease_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'disease'
-    },
+import mongoose from "mongoose";
+import Disease from "./diseases.ts";
+
+let treatmentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     price: {
         type: Number,
         required: true
-    }
-})
-const Treatment = mongoose.model('treatment', treatmentsSchema);
+    },
+    image_url: {
+        type: String
+    },
+    disease_ids: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'disease'
+    }]
+});
+
+Disease.syncIndexes();
+const Treatment = mongoose.model('treatment', treatmentSchema);
 export default Treatment;
