@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Mancozeb 75% WP (Protectant Fungicide)",
+    "description": "A broad-spectrum, non-systemic protectant fungicide. Highly effective when used preventatively against Black and Yellow Sigatoka to prevent spore germination on banana leaves.",
+    "price": 25.50,
+    "image_url": "https://res.cloudinary.com/dwemfljjm/image/upload/v1777121276/Mancozeb_75_WP_Protectant_Fungicide_rttpcr.jpg",
+    "disease_ids": [
+      "69e44e902f8e705ddd732367",
+      "69e45a22f1c0450b8c6cd9f3",
+      "69e45a90bb19f6ec8c099698",
+      "69e45b16f23eee107bde6304",
+      "69e460ff3e82d2dbaae8e13c",
+      "69e46167479c3e2a495b96a9",
+      "69e4798b88f0aa10a8dcab6d",
+      "69e47ae388f0aa10a8dcab74",
+      "69e51246f22bd8d67d147761"
+    ]
+  },
+  {
+    "name": "Propiconazole 25% EC (Systemic Fungicide)",
+    "description": "A systemic foliar fungicide providing excellent curative and protective action against severe fungal infections like Sigatoka diseases and Target Spot. It stops the development of fungi by interfering with the biosynthesis of sterols in cell membranes.",
+    "price": 45.00,
+    "image_url": "https://res.cloudinary.com/dwemfljjm/image/upload/v1777121298/Tilt_Fungicide_Propiconazole_25_EC_Systemic_Control_of_Fungal_Diseases_gzqli0.jpg",
+    "disease_ids": [
+      "69e44e902f8e705ddd732367",
+      "69e45a22f1c0450b8c6cd9f3",
+      "69e45a90bb19f6ec8c099698",
+      "69e45b16f23eee107bde6304",
+      "69e460ff3e82d2dbaae8e13c",
+      "69e46167479c3e2a495b96a9",
+      "69e4798b88f0aa10a8dcab6d",
+      "69e47ae388f0aa10a8dcab74",
+      "69e51246f22bd8d67d147761",
+      "69e5122cf22bd8d67d14775a"
+    ]
+  },
+  {
+    "name": "Copper Oxychloride 50% WP",
+    "description": "A traditional copper-based preventative fungicide. Excellent for managing fungal leaf spots, including Target spot and Sigatoka. Works well in rotation programs to prevent fungicide resistance.",
+    "price": 18.75,
+    "image_url": "https://res.cloudinary.com/dwemfljjm/image/upload/v1777121253/Copper_Oxychloride_50_WP_so8lnl.jpg",
+    "disease_ids": [
+      "69e44e902f8e705ddd732367",
+      "69e45a22f1c0450b8c6cd9f3",
+      "69e45a90bb19f6ec8c099698",
+      "69e45b16f23eee107bde6304",
+      "69e460ff3e82d2dbaae8e13c",
+      "69e46167479c3e2a495b96a9",
+      "69e4798b88f0aa10a8dcab6d",
+      "69e47ae388f0aa10a8dcab74",
+      "69e51246f22bd8d67d147761",
+      "69e5122cf22bd8d67d14775a"
+    ]
+  },
+  {
+    "name": "Horticultural Mineral Spray Oil",
+    "description": "Used in combination with systemic fungicides (like Propiconazole) to improve coverage, prevent wash-off during rain, and enhance penetration into the banana leaf. Essential for Black Sigatoka management.",
+    "price": 32.00,
+    "image_url": "https://res.cloudinary.com/dwemfljjm/image/upload/v1777121209/Horticultural_Mineral_Spray_Oil_sm9kl4.jpg",
+    "disease_ids": [
+      "69e44e902f8e705ddd732367",
+      "69e45a22f1c0450b8c6cd9f3",
+      "69e45a90bb19f6ec8c099698",
+      "69e45b16f23eee107bde6304",
+      "69e460ff3e82d2dbaae8e13c",
+      "69e46167479c3e2a495b96a9",
+      "69e4798b88f0aa10a8dcab6d",
+      "69e47ae388f0aa10a8dcab74",
+      "69e51246f22bd8d67d147761"
+    ]
+  }
+]
