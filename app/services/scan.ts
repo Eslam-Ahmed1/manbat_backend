@@ -94,11 +94,11 @@ If the plant is completely healthy, return an empty array [].
         throw new appError("Failed to analyze image or save to database", 500);
     }
 };
-const getScanHistory = async(userId: string) => {
+const getScanHistory = async (userId: string) => {
     const data = await PlantScan.find({ user_id: userId }).populate('disease_ids');
     return data;
 }
-const getScanHistoryByPlantId = async(plantId: string) => {
+const getScanHistoryByPlantId = async (plantId: string) => {
     const data = await PlantScan.find({ _id: plantId }).populate('disease_ids');
     return data;
 }
