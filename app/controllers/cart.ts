@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import {type Request,type Response, type NextFunction } from 'express';
 import * as cartService from '../services/cart.ts';
 import { appError } from '../../utils/appErrors.ts';
 
@@ -11,11 +11,11 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
 
 export const addToCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { product_id, productModel, quantity, price } = req.body;
-        if (!product_id || !productModel || !quantity || price === undefined) {
-            throw new appError("Missing required fields: product_id, productModel, quantity, price", 400);
+        const { product_id, quantity, price } = req.body;
+        if (!product_id || !quantity || price === undefined) {
+            throw new appError("Missing required fields: product_id, quantity, price", 400);
         }
-        const cart = await cartService.addToCart(req.user._id as string, product_id, productModel, quantity, price);
+        const cart = await cartService.addToCart(req.user._id as string, product_id, quantity, price);
         res.status(200).json({ message: "Item added to cart", data: cart });
     } catch (error) { next(error); }
 };

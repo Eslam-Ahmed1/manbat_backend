@@ -1,4 +1,5 @@
 import Cart from "../models/carts.ts";
+import Product from "../models/product.ts";
 import { appError } from "../../utils/appErrors.ts";
 
 export const getCart = async (userId: string) => {
@@ -9,7 +10,7 @@ export const getCart = async (userId: string) => {
     return cart;
 };
 
-export const addToCart = async (userId: string, productId: string, productModel: string, quantity: number, price: number) => {
+export const addToCart = async (userId: string, productId: string, quantity: number, price: number) => {
     let cart = await Cart.findOne({ user_id: userId });
     if (!cart) {
         cart = new Cart({ user_id: userId, items: [], total_price: 0 });
@@ -19,7 +20,7 @@ export const addToCart = async (userId: string, productId: string, productModel:
     if (existingItemIndex > -1) {
         cart.items[existingItemIndex].quantity += quantity;
     } else {
-        cart.items.push({ product_id: productId, productModel, quantity, price } as any);
+        cart.items.push({ product_id: productId, quantity, price } as any);
     }
 
     cart.total_price = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0);

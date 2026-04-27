@@ -4,9 +4,8 @@ const orderItemSchema = new mongoose.Schema({
     product_id: { 
         type: mongoose.Schema.Types.ObjectId, 
         required: true, 
-        refPath: 'items.productModel' 
+        ref: 'product' 
     },
-    productModel: { type: String, required: true, enum: ['plant', 'treatment'] },
     quantity: { type: Number, required: true },
     price: { type: Number, required: true }
 });

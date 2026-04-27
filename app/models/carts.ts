@@ -4,12 +4,7 @@ const cartItemSchema = new mongoose.Schema({
     product_id: { 
         type: mongoose.Schema.Types.ObjectId, 
         required: true, 
-        refPath: 'items.productModel' // Dynamically reference Plant or Treatment
-    },
-    productModel: { 
-        type: String, 
-        required: true, 
-        enum: ['plant', 'treatment'] // Must match your mongoose.model names
+        ref: 'product'
     },
     quantity: { type: Number, required: true, min: 1, default: 1 },
     price: { type: Number, required: true }

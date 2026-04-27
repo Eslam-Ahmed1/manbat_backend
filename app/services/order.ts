@@ -1,5 +1,6 @@
 import Order from "../models/orders.ts";
 import Cart from "../models/carts.ts";
+import Product from "../models/product.ts";
 import { appError } from "../../utils/appErrors.ts";
 
 export const createOrder = async (userId: string, shippingAddress: string) => {
