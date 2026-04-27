@@ -6,6 +6,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import Treatment from "../models/treatments.ts";
 import { getTreatmentsByDiseaseIds } from "./treatment.ts";
+import Product from "../models/product.ts";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -65,23 +66,31 @@ If multiple diseases are present, include one object per disease.
 
         const diseaseIds = [];
         const treatments = [];
+        const Products=[];
         // 3. Save any new diseases to the knowledge base (Diseases collection)
         for (const d of detectedDiseases) {
             let diseaseRecord = await Disease.findOne({ name: d.name });
             let treatmentRecord = await Treatment.findOne({ name: d.treatment });
+            
             if (!diseaseRecord) {
                 diseaseRecord = new Disease({ name: d.name, description: d.description });
                 await diseaseRecord.save();
-                if (!treatmentRecord) {
-                    treatmentRecord = new Treatment({ name: d.treatment });
-                    await treatmentRecord.save();
-                }
+            }
 
+            if (!treatmentRecord) {
+                treatmentRecord = new Treatment({ name: d.treatment, disease_ids: [diseaseRecord._id] });
+                await treatmentRecord.save();
+            } else if (!treatmentRecord.disease_ids.some(id => id.toString() === diseaseRecord._id.toString())) {
+                // Check if the disease is already linked to the treatment to prevent duplicates
                 treatmentRecord.disease_ids.push(diseaseRecord._id);
                 await treatmentRecord.save();
             }
+
+            let productRecord = await Product.findOne({ treatment_id: treatmentRecord._id});
+
             treatments.push(treatmentRecord);
             diseaseIds.push(diseaseRecord._id);
+            if (productRecord) Products.push(productRecord);
         }
 
             // 4. Upload the image to Cloudinary
@@ -104,7 +113,7 @@ If multiple diseases are present, include one object per disease.
             await newScan.save();
 
             // 6. Return the populated scan to the user
-            return {PlantScan:await PlantScan.findById(newScan._id).populate('disease_ids'),treatments:treatments};
+            return {PlantScan:await PlantScan.findById(newScan._id).populate('disease_ids'),treatments:treatments,Products:Products};
     } catch (error) {
         console.log(error);
         throw new appError("Failed to analyze image or save to database", 500);
@@ -117,13 +126,14 @@ const getScanHistory = async (userId: string) => {
     // Wait for all the asynchronous treatment fetches to complete
     await Promise.all(data.map(async (scan: any) => {
         // Extract the IDs into a string array safely
-        const extractedDiseaseIds: string[] = scan.disease_ids.map((disease: any) => disease._id.toString());
+        const extractedDiseaseIds: string[] = (scan.disease_ids || [])
+            .filter((disease: any) => disease && disease._id)
+            .map((disease: any) => disease._id.toString());
 
-        // Fetch treatments for this specific scan's diseases
-        const treatments = await getTreatmentsByDiseaseIds(extractedDiseaseIds);
-
-        // Attach the fetched treatments to the scan object
-        scan.treatments = treatments;
+        // Fetch treatments only if diseases were detected
+        scan.treatments = extractedDiseaseIds.length > 0 
+            ? await getTreatmentsByDiseaseIds(extractedDiseaseIds)
+            : [];
     }));
 
 

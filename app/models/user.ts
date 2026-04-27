@@ -4,7 +4,9 @@ let userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, default: 'user', enum: ['user', 'admin'] },
-    created_at: { type: Date, default: Date.now }
+    created_at: { type: Date, default: Date.now },
+    address: { type: String },
+    phone: { type: String }
 })
 let User = mongoose.model('user', userSchema);
 // Add this temporarily to drop indexes that aren't in your schema anymore
