@@ -7,7 +7,12 @@ let plantSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    image_url: {
+        type: String,
+        required: true
     }
 })
 const Plant = mongoose.model('plant', plantSchema);
+Plant.syncIndexes();
 export default Plant;
