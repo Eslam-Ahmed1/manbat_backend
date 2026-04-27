@@ -16,7 +16,6 @@ export const getTreatmentsByDiseaseId = async (diseaseId: string) => {
 
 export const getTreatmentsByDiseaseIds = async (diseaseIds: string[]) => {
     // Finds all treatments where the 'disease_ids' array contains AT LEAST ONE of the provided IDs
-    console.log(await Treatment.find({disease_ids:{ $in:[ new mongose.Types.ObjectId('69e5122cf22bd8d67d14775a')]}}));
     const objectIds = diseaseIds.map(id => new mongose.Types.ObjectId(id));
     return await Treatment.find({ disease_ids: { $in:objectIds} }).populate('disease_ids', 'name');
 };
