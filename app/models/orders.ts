@@ -1,32 +1,26 @@
-import mongoose from "mongoose"
-let orderSchema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-        required: true
+import mongoose from "mongoose";
+
+const orderItemSchema = new mongoose.Schema({
+    product_id: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'product' 
     },
-    treatment_ids: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'treatment'
-    }],
-    address: {
-        type: String,
-        required: true
-    },
-    total_price: {
-        type: Number,
-        required: true
-    },
-    status: {
-        type: String,
-        required: true,
-        enum: ['Pending', 'Processing', 'Shipped', 'In Transit', 'Delivered', 'Canceled', 'Faild'],
-        default: 'Pending'
-    },
-    order_date: {
-        type: Date,
-        default: Date.now
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true }
+});
+
+const orderSchema = new mongoose.Schema({
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+    items: [orderItemSchema],
+    total_amount: { type: Number, required: true },
+    shipping_address: { type: String, required: true },
+    status: { 
+        type: String, 
+        enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'], 
+        default: 'pending' 
     }
-})
+}, { timestamps: true });
+
 const Order = mongoose.model('order', orderSchema);
 export default Order;
