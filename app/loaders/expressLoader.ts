@@ -13,6 +13,7 @@ import { errorHandling } from '../controllers/errorHandling.ts';
 import conectDB from './mongooseLoader.ts'
 import ProductRoute from '../routes/product.ts';
 import UserRoute from '../routes/user.ts';
+import AdminRoute from '../routes/admin.ts';
 //------
 let serverSetup = (async () => {
     let app = express();
@@ -28,6 +29,7 @@ let serverSetup = (async () => {
     app.use('/api/orders', OrderRoute)
     app.use('/api/product',ProductRoute)
     app.use('/api/user', UserRoute)
+    app.use('/api/admin', AdminRoute)
     app.use(errorHandling as express.ErrorRequestHandler)
     let server = app.listen(process.env.PORT, () => {
         console.log('server connect sucessfully');

@@ -2,30 +2,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import Disease from "../models/diseases.ts";
 import PlantScan from "../models/plantScans.ts";
 import { appError } from "../../utils/appErrors.ts";
-import { v2 as cloudinary } from 'cloudinary';
-import streamifier from 'streamifier';
 import Treatment from "../models/treatments.ts";
 import { getTreatmentsByDiseaseIds } from "./treatment.ts";
 import Product from "../models/product.ts";
-
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
-
-const uploadToCloudinary = (buffer: Buffer): Promise<any> => {
-    return new Promise((resolve, reject) => {
-        const cld_upload_stream = cloudinary.uploader.upload_stream(
-            { folder: "manbut_plant_scans" },
-            (error, result) => {
-                if (result) resolve(result);
-                else reject(error);
-            }
-        );
-        streamifier.createReadStream(buffer).pipe(cld_upload_stream);
-    });
-};
+import { uploadToCloudinary } from "../../utils/helpFuncitons.ts";
 
 const getAIModel = () => {
     if (!process.env.GEMINI_API_KEY) {
@@ -96,7 +76,7 @@ If multiple diseases are present, include one object per disease.
             // 4. Upload the image to Cloudinary
             let imageUrl = "";
             try {
-                const uploadResult = await uploadToCloudinary(imageBuffer);
+                const uploadResult = await uploadToCloudinary(imageBuffer,"manbut_plant_scans");
                 imageUrl = uploadResult.secure_url;
             } catch (error) {
                 console.error("Cloudinary upload error:", error);

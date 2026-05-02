@@ -1,0 +1,16 @@
+import { type Request, type Response, type NextFunction } from 'express';
+import User from '../models/user.ts';
+import { appError } from '../../utils/appErrors.ts';
+
+const AdminAuthorization = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await User.findById(req.user._id);
+        if (user && user.role === 'admin') {
+            next();
+        } else {
+            next(new appError('Access denied. Admin privileges required.', 403));
+        }
+    } catch (error) { next(error); }
+};
+
+export default AdminAuthorization;
