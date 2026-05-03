@@ -6,7 +6,7 @@ let treatmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
+    instructions: {
         type: String
     },
     disease_ids: [{
@@ -15,6 +15,7 @@ let treatmentSchema = new mongoose.Schema({
     }]
 });
 
-Disease.syncIndexes();
 const Treatment = mongoose.model('treatment', treatmentSchema);
+Treatment.syncIndexes();
+
 export default Treatment;
