@@ -3,7 +3,10 @@ import * as productController from '../controllers/product.ts';
 
 const router = express.Router();
 
-// Public Route: Get all products (supports pagination, search, and filtering)
+// Public Routes
 router.get('/', productController.getProducts as RequestHandler);
+router.get('/categories', productController.getProductCategories as RequestHandler);
+router.get('/featured', productController.getFeaturedProducts as RequestHandler);
+router.get('/:id', productController.getProductById as RequestHandler);
 
 export default router;

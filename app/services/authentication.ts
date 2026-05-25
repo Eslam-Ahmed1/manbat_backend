@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import User from '../models/user.ts'
 import JWT from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
@@ -25,7 +28,8 @@ const register = async (userDTO: userDTO) => {
     const payload = {
         _id: savedUser._id,
         name: savedUser.name,
-        email: savedUser.email
+        email: savedUser.email,
+        role: savedUser.role
     };
 
     if (!process.env.SECRET_TOKEN) {
@@ -47,7 +51,8 @@ const login = async (loginDTO: loginDTO) => {
         const payload = {
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            role: user.role
         };
 
         if (!process.env.SECRET_TOKEN) {
@@ -65,4 +70,28 @@ const login = async (loginDTO: loginDTO) => {
         throw new appError('Email or Password Incorrect', 401)
     }
 }
-export { register, login };
+interface changePasswordDTO {
+    userId: string;
+    currentPassword: string;
+    newPassword: string;
+}
+
+const changePassword = async (dto: changePasswordDTO) => {
+    const user = await User.findById(dto.userId);
+    if (!user) {
+        throw new appError("User not found", 404);
+    }
+
+    const isMatch = await bcrypt.compare(dto.currentPassword, user.password);
+    if (!isMatch) {
+        throw new appError("Current password is incorrect", 401);
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(dto.newPassword, salt);
+    await user.save();
+
+    return { message: "Password changed successfully" };
+};
+
+export { register, login, changePassword };

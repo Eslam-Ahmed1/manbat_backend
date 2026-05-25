@@ -19,7 +19,7 @@ const analyzePlantImageController = async (req: Request, res: Response, next: Ne
 const getScanHistoryController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = req.user._id;
-        const scanHistory = await getScanHistory(userId);
+        const scanHistory = await getScanHistory(userId, req.query);
         res.status(200).json({ message: "get plants scand history, completed", data: scanHistory })
 
     } catch (error) {
@@ -28,11 +28,10 @@ const getScanHistoryController = async (req: Request, res: Response, next: NextF
 }
 const getScanHistoryByPlantIdController = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        //// for more solidity we need first get user related by this id and compare with current user (but why i need this in mobile app)
-        console.log(req.user);
-        const plantId = req.params.id;
-        const scanHistoryByPlantId = await getScanHistoryByPlantId(plantId as string);
-        res.status(200).json({ message: "get plant scand history, completed", data: scanHistoryByPlantId })
+        const userId = req.user._id;
+        const scanId = req.params.id;
+        const result = await getScanHistoryByPlantId(scanId as string, userId);
+        res.status(200).json({ message: "Scan details retrieved", data: result })
 
     } catch (error) {
         next(error); // Pass to global error handler

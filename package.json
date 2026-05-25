@@ -8,8 +8,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "nodemon app/loaders/expressLoader.ts",
-    "start": "tsx app/loaders/expressLoader.ts"
+    "app": "nodemon --exec tsx app/loaders/expressLoader.ts",
+    "start": "tsx app/loaders/expressLoader.ts",
+    "seed:categories": "tsx seeds/seedCategories.ts",
+    "seed:plants": "tsx seeds/seedPlants.ts",
+    "seed:users": "tsx seeds/seedUsers.ts",
+    "seed:diseases": "tsx seeds/seedDiseases.ts",
+    "seed:articles": "tsx seeds/seedArticles.ts",
+    "seed:orders": "tsx seeds/seedOrdersAndScans.ts",
+    "seed:scans": "tsx seeds/seedScans.ts",
+    "seed:treatments": "tsx seeds/seedTreatments.ts",
+    "seed:catalog": "tsx seeds/seedCatalog.ts",
+    "seed:cart": "tsx seeds/seedCart.ts",
+    "seed:admin": "tsx seeds/seedAdmin.ts",
+    "seed:all": "tsx seeds/seed.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

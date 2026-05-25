@@ -1,7 +1,7 @@
 import { request, type Response, type Request, type NextFunction } from 'express';
 import { authenticationService } from '../services/index.ts'
 import validate from '../middlewares/validationRequestMiddleware.ts';
-import { loginSchema, registerSchema } from '../schemas/authentication.ts';
+import { changePasswordSchema, loginSchema, registerSchema } from '../schemas/authentication.ts';
 import z, { json } from 'zod'
 import { fromError, isZodErrorLike } from 'zod-validation-error'
 import { appError } from '../../utils/appErrors.ts';
@@ -43,4 +43,18 @@ const user = async (req: Request, res: Response, next: NextFunction) => {
         next(err)
     }
 }
-export { register, login, user }
+const changePasswordMiddleware = validate({ bodySchema: changePasswordSchema })
+const changePassword: typeof changePasswordMiddleware = async (req, res, next) => {
+    try {
+        const result = await authenticationService.changePassword({
+            userId: req.user._id,
+            currentPassword: req.body.currentPassword,
+            newPassword: req.body.newPassword,
+        });
+        res.status(200).json(result);
+    } catch (err) {
+        next(err);
+    }
+}
+
+export { register, login, user, changePassword }
