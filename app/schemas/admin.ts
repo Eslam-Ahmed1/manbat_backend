@@ -129,13 +129,23 @@ const tagsSchema = z.union([
     z.array(z.string().min(1))
 ]).optional();
 
+/** General article = no plant (null). Multipart may send "" or omit the field. */
+const optionalPlantIdSchema = z
+    .string()
+    .optional()
+    .transform((val) => {
+        if (val === undefined) return undefined;
+        const trimmed = val.trim();
+        return trimmed === "" ? null : trimmed;
+    });
+
 // Article Schemas
 export const createArticleSchema = z.object({
     body: z.object({
         title: z.string().min(1, "Article title is required"),
         summary: z.string().optional(),
         content: z.string().min(10, "Content must be at least 10 characters"),
-        plantId: z.union([z.string().min(1), z.null()]).optional(),
+        plantId: optionalPlantIdSchema,
         tags: tagsSchema,
         status: z.enum(['draft', 'published']).optional()
     })
@@ -146,7 +156,7 @@ export const updateArticleSchema = z.object({
         title: z.string().min(1).optional(),
         summary: z.string().optional(),
         content: z.string().min(10).optional(),
-        plantId: z.union([z.string().min(1), z.null()]).optional(),
+        plantId: optionalPlantIdSchema,
         tags: tagsSchema,
         status: z.enum(['draft', 'published']).optional()
     })

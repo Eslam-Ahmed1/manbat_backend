@@ -114,12 +114,12 @@ router.delete('/plants/:id', adminController.deletePlant as RequestHandler);
 
 // Article Management
 router.get('/articles', adminController.getAllArticles as RequestHandler);
-router.get('/articles/:id', adminController.getArticleById as RequestHandler);
 router.post('/articles',
     upload.single('articleImage'),
     validateRequest(adminSchemas.createArticleSchema) as RequestHandler,
     adminController.createArticle as RequestHandler
 );
+router.get('/articles/:id', adminController.getArticleById as RequestHandler);
 router.put('/articles/:id',
     upload.single('articleImage'),
     validateRequest(adminSchemas.updateArticleSchema) as RequestHandler,

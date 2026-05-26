@@ -1760,4 +1760,614 @@ TypeError: Cannot set property query of #<IncomingMessage> which has only a gett
     at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
     at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
     at AdminAuthorization (J:\Programming\Node js\manbat_backend\app\middlewares\adminMiddleware.ts:9:13)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:01:05.643Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles/upload
+IP       : ::1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:07:46.252Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles/upload
+IP       : ::1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:07:46.276Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:08:17.522Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles/upload
+IP       : ::1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:10:43.767Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles/upload
+IP       : ::1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:10:43.783Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:15:26.822Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles/upload
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:15:26.845Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/upload/article-image
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:15:26.848Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Authorization header missing
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Authorization header missing
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:9:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:21:32.186Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:21:43.103Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:21:53.439Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:22:47.593Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:23:17.520Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:26:47.106Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:26:48.133Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:26:50.575Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:26:52.567Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:26:52.863Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:27:53.076Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Email or Password Incorrect
+METHOD   : POST
+URL      : /api/authentication/login
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Email or Password Incorrect
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Module.login (J:\Programming\Node js\manbat_backend\app\services\authentication.ts:70:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async login (J:\Programming\Node js\manbat_backend\app\controllers\authentication.ts:28:23)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:27:53.298Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Email or Password Incorrect
+METHOD   : POST
+URL      : /api/authentication/login
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Email or Password Incorrect
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Module.login (J:\Programming\Node js\manbat_backend\app\services\authentication.ts:70:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async login (J:\Programming\Node js\manbat_backend\app\controllers\authentication.ts:28:23)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:28:07.869Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Email or Password Incorrect
+METHOD   : POST
+URL      : /api/authentication/login
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Email or Password Incorrect
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Module.login (J:\Programming\Node js\manbat_backend\app\services\authentication.ts:70:15)
+    at async login (J:\Programming\Node js\manbat_backend\app\controllers\authentication.ts:28:23)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:28:08.008Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : token empty
+METHOD   : POST
+URL      : /api/admin/articles
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: token empty
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Authorization (J:\Programming\Node js\manbat_backend\app\middlewares\authMiddleware.ts:13:25)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:342:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at router.handle (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:186:3)
+    at router (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:152:17)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:32:03.566Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : PUT
+URL      : /api/admin/articles/6a14bfb901029baa53879e95
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:32:09.646Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : PUT
+URL      : /api/admin/articles/6a14bfb901029baa53879e95
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:34:26.435Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : PUT
+URL      : /api/admin/articles/6a14bfb901029baa53879e95
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:34:28.246Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : PUT
+URL      : /api/admin/articles/6a14bfb901029baa53879e95
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:35:50.023Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : PUT
+URL      : /api/admin/articles/6a14bfb901029baa53879e95
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T21:35:54.708Z]
+TYPE     : Operational (Expected)
+STATUS   : 400
+MESSAGE  : Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+METHOD   : PUT
+URL      : /api/admin/articles/6a14bfb901029baa53879e95
+IP       : ::ffff:127.0.0.1
+USER_ID  : 6a124581c1a983b277159b35
+STACK    :
+Error: Validation error: Too small: expected string to have >=1 characters at "body.plantId"
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:11:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-25T22:10:33.677Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : invalid token, please log in again
+METHOD   : GET
+URL      : /api/admin/orders?limit=5
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: invalid token, please log in again
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at detectError (J:\Programming\Node js\manbat_backend\app\services\detectError.ts:14:16)
+    at errorHandling (J:\Programming\Node js\manbat_backend\app\controllers\errorHandling.ts:7:11)
+    at Layer.handleError (J:\Programming\Node js\manbat_backend\node_modules\router\lib\layer.js:116:17)
+    at trimPrefix (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:340:13)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:297:9
+    at processParams (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:582:12)
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:291:5)
+    at J:\Programming\Node js\manbat_backend\node_modules\router\index.js:688:15
+    at next (J:\Programming\Node js\manbat_backend\node_modules\router\index.js:276:14)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[2026-05-26T19:44:12.470Z]
+TYPE     : Operational (Expected)
+STATUS   : 401
+MESSAGE  : Email or Password Incorrect
+METHOD   : POST
+URL      : /api/authentication/login
+IP       : ::ffff:127.0.0.1
+STACK    :
+Error: Email or Password Incorrect
+    at new appError (J:\Programming\Node js\manbat_backend\utils\appErrors.ts:9:15)
+    at Module.login (J:\Programming\Node js\manbat_backend\app\services\authentication.ts:70:15)
+    at async login (J:\Programming\Node js\manbat_backend\app\controllers\authentication.ts:28:23)
 ────────────────────────────────────────────────────────────

@@ -38,6 +38,9 @@ const seedOrdersAndScans = async () => {
             process.exit(1);
         }
 
+        const getUser = (index: number) => users[index % users.length];
+        const getProduct = (index: number) => products[index % products.length];
+
         // 2. Generate past dates (spread over the last 30 days)
         const getPastDate = (daysAgo: number) => {
             const date = new Date();
@@ -45,142 +48,123 @@ const seedOrdersAndScans = async () => {
             return date;
         };
 
-        // 3. Seed Orders (12 realistic orders with items, statuses, and varying timestamps)
-        const ordersData = [
-            {
-                user: users[0],
-                items: [
-                    { product: products[0], quantity: 2 }, // NPK Fertilizer
-                    { product: products[4], quantity: 1 }  // TopFungus Pro Spray
-                ],
-                status: 'delivered',
-                daysAgo: 25,
-                address: users[0].address || "Cairo, Egypt"
-            },
-            {
-                user: users[1],
-                items: [
-                    { product: products[1], quantity: 3 }  // Organic Compost
-                ],
-                status: 'delivered',
-                daysAgo: 20,
-                address: users[1].address || "Cairo, Egypt"
-            },
-            {
-                user: users[2],
-                items: [
-                    { product: products[10], quantity: 5 }, // Cherry Tomato Seeds
-                    { product: products[13], quantity: 1 }  // Pruning Shears
-                ],
-                status: 'delivered',
-                daysAgo: 18,
-                address: users[2].address || "Cairo, Egypt"
-            },
-            {
-                user: users[3],
-                items: [
-                    { product: products[5], quantity: 2 }, // Neem Oil
-                    { product: products[14], quantity: 2 }  // Stainless Trowel
-                ],
-                status: 'delivered',
-                daysAgo: 15,
-                address: users[3].address || "Alexandria, Egypt"
-            },
-            {
-                user: users[4],
-                items: [
-                    { product: products[18], quantity: 4 }, // Premium Potting Mix
-                    { product: products[16], quantity: 2 }  // Terracotta Pot
-                ],
-                status: 'delivered',
-                daysAgo: 12,
-                address: users[4].address || "Mansoura, Egypt"
-            },
-            {
-                user: users[0],
-                items: [
-                    { product: products[20], quantity: 1 }  // Drip Irrigation Kit
-                ],
-                status: 'shipped',
-                daysAgo: 8,
-                address: users[0].address || "Cairo, Egypt"
-            },
-            {
-                user: users[1],
-                items: [
-                    { product: products[2], quantity: 2 },  // Seaweed Fertilizer
-                    { product: products[11], quantity: 3 }  // Mixed Herb Seeds
-                ],
-                status: 'shipped',
-                daysAgo: 6,
-                address: users[1].address || "Cairo, Egypt"
-            },
-            {
-                user: users[2],
-                items: [
-                    { product: products[6], quantity: 1 }  // Copper Fungicide
-                ],
-                status: 'processing',
-                daysAgo: 4,
-                address: users[2].address || "Cairo, Egypt"
-            },
-            {
-                user: users[3],
-                items: [
-                    { product: products[15], quantity: 1 }, // Soil pH Meter
-                    { product: products[19], quantity: 3 }  // Perlite Amendment
-                ],
-                status: 'pending',
-                daysAgo: 2,
-                address: users[3].address || "Alexandria, Egypt"
-            },
-            {
-                user: users[4],
-                items: [
-                    { product: products[8], quantity: 2 }  // Insecticidal Soap
-                ],
-                status: 'pending',
-                daysAgo: 1,
-                address: users[4].address || "Mansoura, Egypt"
-            },
-            {
-                user: users[0],
-                items: [
-                    { product: products[13], quantity: 1 }  // Pruning Shears
-                ],
-                status: 'cancelled',
-                daysAgo: 14,
-                address: users[0].address || "Cairo, Egypt"
-            },
-            {
-                user: users[1],
-                items: [
-                    { product: products[21], quantity: 2 }  // Watering Globes
-                ],
-                status: 'delivered',
-                daysAgo: 22,
-                address: users[1].address || "Cairo, Egypt"
-            }
+        // 3. Seed Orders (about 510 realistic orders)
+        const cities = [
+            "Cairo, Egypt", "Giza, Egypt", "Alexandria, Egypt", "Mansoura, Egypt", 
+            "Tanta, Egypt", "Asyut, Egypt", "Hurghada, Egypt", "Sharm El Sheikh, Egypt", 
+            "Port Said, Egypt", "Suez, Egypt", "Luxor, Egypt", "Aswan, Egypt", 
+            "Zagazig, Egypt", "Damietta, Egypt", "Ismailia, Egypt"
         ];
 
+        console.log('🌱 Generating 510 realistic orders...');
         let ordersAdded = 0;
-        for (const ord of ordersData) {
-            const itemsList = ord.items.map(item => ({
-                product_id: item.product._id,
-                quantity: item.quantity,
-                price: item.product.price
-            }));
+        const totalOrdersToSeed = 510;
+
+        // First, guarantee exactly 10 orders for EACH user in the DB
+        for (const user of users) {
+            for (let k = 0; k < 10; k++) {
+                const itemCount = Math.floor(Math.random() * 3) + 1;
+                const itemsList = [];
+                const selectedProductIds = new Set();
+
+                for (let j = 0; j < itemCount; j++) {
+                    let product;
+                    do {
+                        product = products[Math.floor(Math.random() * products.length)];
+                    } while (selectedProductIds.has(product._id.toString()) && selectedProductIds.size < products.length);
+                    
+                    selectedProductIds.add(product._id.toString());
+                    
+                    const quantity = Math.floor(Math.random() * 4) + 1;
+                    itemsList.push({
+                        product_id: product._id,
+                        quantity,
+                        price: product.price
+                    });
+                }
+
+                const total_amount = itemsList.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+                const roll = Math.random();
+                let status = 'delivered';
+                if (roll < 0.05) {
+                    status = 'cancelled';
+                } else if (roll < 0.12) {
+                    status = 'pending';
+                } else if (roll < 0.20) {
+                    status = 'processing';
+                } else if (roll < 0.35) {
+                    status = 'shipped';
+                }
+
+                const daysAgo = Math.floor(Math.random() * 60);
+                const address = user.address || cities[Math.floor(Math.random() * cities.length)];
+
+                const newOrder = new Order({
+                    user_id: user._id,
+                    items: itemsList,
+                    total_amount,
+                    shipping_address: address,
+                    status,
+                    createdAt: getPastDate(daysAgo),
+                    updatedAt: getPastDate(daysAgo)
+                });
+
+                await newOrder.save();
+                ordersAdded++;
+            }
+        }
+
+        // Then, generate the remaining orders randomly
+        const remainingOrders = totalOrdersToSeed - ordersAdded;
+        for (let i = 0; i < remainingOrders; i++) {
+            const user = users[Math.floor(Math.random() * users.length)];
+            
+            const itemCount = Math.floor(Math.random() * 3) + 1;
+            const itemsList = [];
+            const selectedProductIds = new Set();
+
+            for (let j = 0; j < itemCount; j++) {
+                let product;
+                do {
+                    product = products[Math.floor(Math.random() * products.length)];
+                } while (selectedProductIds.has(product._id.toString()) && selectedProductIds.size < products.length);
+                
+                selectedProductIds.add(product._id.toString());
+                
+                const quantity = Math.floor(Math.random() * 4) + 1;
+                itemsList.push({
+                    product_id: product._id,
+                    quantity,
+                    price: product.price
+                });
+            }
 
             const total_amount = itemsList.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
+            const roll = Math.random();
+            let status = 'delivered';
+            if (roll < 0.05) {
+                status = 'cancelled';
+            } else if (roll < 0.12) {
+                status = 'pending';
+            } else if (roll < 0.20) {
+                status = 'processing';
+            } else if (roll < 0.35) {
+                status = 'shipped';
+            }
+
+            const daysAgo = Math.floor(Math.random() * 60);
+            const address = user.address || cities[Math.floor(Math.random() * cities.length)];
+
             const newOrder = new Order({
-                user_id: ord.user._id,
+                user_id: user._id,
                 items: itemsList,
                 total_amount,
-                shipping_address: ord.address,
-                status: ord.status,
-                createdAt: getPastDate(ord.daysAgo),
-                updatedAt: getPastDate(ord.daysAgo)
+                shipping_address: address,
+                status,
+                createdAt: getPastDate(daysAgo),
+                updatedAt: getPastDate(daysAgo)
             });
 
             await newOrder.save();
@@ -190,26 +174,26 @@ const seedOrdersAndScans = async () => {
 
         // 4. Seed Plant Scans (20 realistic scans, some healthy, some diseased, spread across dates)
         const scansData = [
-            { user: users[0], plantName: "Tomato", status: "completed", diseaseNames: ["Early Blight"], daysAgo: 28, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[1], plantName: "Cucumber", status: "completed", diseaseNames: ["Powdery Mildew"], daysAgo: 26, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[2], plantName: "Mint", status: "completed", diseaseNames: [], daysAgo: 24, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
-            { user: users[3], plantName: "Mango", status: "completed", diseaseNames: ["Anthracnose"], daysAgo: 22, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[4], plantName: "Rose", status: "completed", diseaseNames: ["Black Spot"], daysAgo: 20, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[0], plantName: "Tomato", status: "completed", diseaseNames: ["Late Blight"], daysAgo: 18, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[1], plantName: "Basil", status: "completed", diseaseNames: ["Leaf Spot"], daysAgo: 16, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[2], plantName: "Aloe Vera", status: "completed", diseaseNames: [], daysAgo: 14, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
-            { user: users[3], plantName: "Peach", status: "completed", diseaseNames: ["Leaf Curl"], daysAgo: 12, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[4], plantName: "Strawberry", status: "completed", diseaseNames: [], daysAgo: 10, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
-            { user: users[0], plantName: "Tomato", status: "completed", diseaseNames: [], daysAgo: 9, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
-            { user: users[1], plantName: "Lemon", status: "completed", diseaseNames: ["Sooty Mold"], daysAgo: 7, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[2], plantName: "Apple", status: "completed", diseaseNames: ["Rust"], daysAgo: 5, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[3], plantName: "Grape", status: "completed", diseaseNames: ["Downy Mildew"], daysAgo: 4, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[4], plantName: "Peace Lily", status: "completed", diseaseNames: ["Root Rot"], daysAgo: 3, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[0], plantName: "Tomato", status: "completed", diseaseNames: ["Early Blight", "Leaf Spot"], daysAgo: 2, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
-            { user: users[1], plantName: "Watermelon", status: "failed", diseaseNames: [], daysAgo: 15, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Failed scan
-            { user: users[2], plantName: "Orange", status: "pending", diseaseNames: [], daysAgo: 1, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Pending scan
-            { user: users[3], plantName: "Cucumber", status: "completed", diseaseNames: [], daysAgo: 1, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
-            { user: users[4], plantName: "Rose", status: "completed", diseaseNames: ["Rust"], daysAgo: 0, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }
+            { user: getUser(0), plantName: "Tomato", status: "completed", diseaseNames: ["Early Blight"], daysAgo: 28, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(1), plantName: "Cucumber", status: "completed", diseaseNames: ["Powdery Mildew"], daysAgo: 26, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(2), plantName: "Mint", status: "completed", diseaseNames: [], daysAgo: 24, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
+            { user: getUser(3), plantName: "Mango", status: "completed", diseaseNames: ["Anthracnose"], daysAgo: 22, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(4), plantName: "Rose", status: "completed", diseaseNames: ["Black Spot"], daysAgo: 20, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(0), plantName: "Tomato", status: "completed", diseaseNames: ["Late Blight"], daysAgo: 18, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(1), plantName: "Basil", status: "completed", diseaseNames: ["Leaf Spot"], daysAgo: 16, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(2), plantName: "Aloe Vera", status: "completed", diseaseNames: [], daysAgo: 14, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
+            { user: getUser(3), plantName: "Peach", status: "completed", diseaseNames: ["Leaf Curl"], daysAgo: 12, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(4), plantName: "Strawberry", status: "completed", diseaseNames: [], daysAgo: 10, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
+            { user: getUser(0), plantName: "Tomato", status: "completed", diseaseNames: [], daysAgo: 9, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
+            { user: getUser(1), plantName: "Lemon", status: "completed", diseaseNames: ["Sooty Mold"], daysAgo: 7, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(2), plantName: "Apple", status: "completed", diseaseNames: ["Rust"], daysAgo: 5, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(3), plantName: "Grape", status: "completed", diseaseNames: ["Downy Mildew"], daysAgo: 4, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(4), plantName: "Peace Lily", status: "completed", diseaseNames: ["Root Rot"], daysAgo: 3, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(0), plantName: "Tomato", status: "completed", diseaseNames: ["Early Blight", "Leaf Spot"], daysAgo: 2, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" },
+            { user: getUser(1), plantName: "Watermelon", status: "failed", diseaseNames: [], daysAgo: 15, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Failed scan
+            { user: getUser(2), plantName: "Orange", status: "pending", diseaseNames: [], daysAgo: 1, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Pending scan
+            { user: getUser(3), plantName: "Cucumber", status: "completed", diseaseNames: [], daysAgo: 1, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }, // Healthy
+            { user: getUser(4), plantName: "Rose", status: "completed", diseaseNames: ["Rust"], daysAgo: 0, url: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=500" }
         ];
 
         let scansAdded = 0;
