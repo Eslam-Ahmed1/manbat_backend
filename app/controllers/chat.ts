@@ -7,14 +7,14 @@ interface IchatDTO {
     chat_id: string,
     content: string
 }
-const chatPrompt=`You are a plant docotor AI.Only answer questions about plants and diseases. if question outside plants say:"I only answer palnt related questions"`
 const send_message = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const chatDTO = {
             chat_id: req.params.chat_id,
-            content: `${chatPrompt} user question: ${req.body.content}`
+            content: req.body.content as string
         }
-        const AiText = await chatService.send_message(chatDTO as IchatDTO);
+        const userId = req.user._id as string;
+        const AiText = await chatService.send_message(chatDTO as IchatDTO, userId);
         return res.status(200).json({ aiMessage: AiText });
     }
     catch (err) { next(err) }
