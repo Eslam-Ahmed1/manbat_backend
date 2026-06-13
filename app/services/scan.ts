@@ -239,11 +239,19 @@ const analyzePlantImage = async (userId: string, imageBuffer: Buffer, mimeType: 
 
         };
 
-    } catch (error) {
+    } catch (error: any) {
 
         console.error(`   ❌ [SCAN] Failed after ${Date.now() - startTime}ms:`, error);
 
-        throw new appError("Failed to analyze image or save to database", 500);
+        if (error instanceof appError) {
+            throw error;
+        }
+
+        const wrappedError = new appError("Failed to analyze image or save to database", 500);
+        if (error instanceof Error) {
+            wrappedError.stack = error.stack;
+        }
+        throw wrappedError;
 
     }
 
