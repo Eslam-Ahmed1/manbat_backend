@@ -2,6 +2,8 @@ import PlantScan from "../models/plantScans.ts";
 
 import { appError } from "../../utils/appErrors.ts";
 
+import { validateAndVerifyImage } from "./imageValidation.ts";
+
 import {
 
     buildNewDiseaseScanEntry,
@@ -33,6 +35,9 @@ const analyzePlantImage = async (userId: string, imageBuffer: Buffer, mimeType: 
 
 
     try {
+
+        // 🛡️ Layer 1 + 2: Validate file & verify it's a plant image
+        await validateAndVerifyImage(imageBuffer, mimeType);
 
         const { diseases: detectedDiseases, meta } = await detectDiseasesFromImage(
 
