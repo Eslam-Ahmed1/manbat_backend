@@ -243,7 +243,7 @@ const analyzePlantImage = async (userId: string, imageBuffer: Buffer, mimeType: 
 
         console.error(`   ❌ [SCAN] Failed after ${Date.now() - startTime}ms:`, error);
 
-        if (error instanceof appError) {
+        if (error instanceof appError || (error && error.isOperational === true)) {
             throw error;
         }
 

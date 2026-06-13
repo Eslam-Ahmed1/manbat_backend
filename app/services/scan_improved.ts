@@ -178,7 +178,7 @@ If multiple diseases detected, include all of them.
         };
     } catch (error: any) {
         console.log(error);
-        if (error instanceof appError) {
+        if (error instanceof appError || (error && error.isOperational === true)) {
             throw error;
         }
         const wrappedError = new appError("Failed to analyze image or save to database", 500);
