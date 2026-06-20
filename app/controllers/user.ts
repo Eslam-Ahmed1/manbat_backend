@@ -12,8 +12,18 @@ export const getProfile = async (req: Request, res: Response, next: NextFunction
 export const updateProfile = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = req.user._id as string;
+        const imageBuffer = req.file?.buffer; // من multer
         // req.body can contain fields like name, phone, address, etc.
-        const updatedProfile = await userService.updateUserProfile(userId, req.body);
+        const updatedProfile = await userService.updateUserProfile(userId, imageBuffer, req.body);
         res.status(200).json({ message: "Profile updated successfully", data: updatedProfile });
+    }
+     catch (error) { next(error); }
+};
+
+export const deleteAccount = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user._id as string;
+        const result = await userService.deleteAccount(userId);
+        res.status(200).json(result);
     } catch (error) { next(error); }
 };

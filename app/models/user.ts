@@ -6,7 +6,10 @@ let userSchema = new mongoose.Schema({
     role: { type: String, default: 'user', enum: ['user', 'admin'] },
     created_at: { type: Date, default: Date.now },
     address: { type: String },
-    phone: { type: String }
+    phone: { type: String },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
+    image_url: { type: String }
 })
 let User = mongoose.model('user', userSchema);
 // Add this temporarily to drop indexes that aren't in your schema anymore

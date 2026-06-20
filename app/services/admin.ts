@@ -9,6 +9,7 @@ import Category from "../models/categories.ts";
 import ProductCategory from "../models/productCategory.ts";
 import Article from "../models/articles.ts";
 import { paginate } from "../../utils/pagination.ts";
+import { sendOrderStatusEmail } from "./email.ts";
 
 // --- PRODUCT MANAGEMENT ---
 interface IProductData {
@@ -132,8 +133,28 @@ export const updateOrderStatus = async (orderId: string, status: string) => {
     const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
     if (!validStatuses.includes(status)) throw new appError(`Invalid status. Must be one of: ${validStatuses.join(', ')}`, 400);
 
-    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
+    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true }).populate('user_id');
     if (!order) throw new appError("Order not found", 404);
+
+    if (status == 'cancelled') {
+        for (const item of order.items) {
+            const product = await Product.findById(item.product_id);
+            if (!product) throw new appError(`Product not found`, 404);
+            if (product.quantity < item.quantity) throw new appError(`Insufficient stock for product: ${product.name}`, 400);
+
+            product.quantity -= item.quantity;
+            await product.save();
+        }
+    }
+    const user: any = order.user_id;
+    if (user && user.email) {
+        try {
+            await sendOrderStatusEmail(user.email, user.name, order._id.toString(), status);
+        } catch (error) {
+            console.error("Failed to send order status email:", error);
+        }
+    }
+
     return order;
 };
 
@@ -449,6 +470,7 @@ export const getAdvancedAnalytics = async () => {
 
     // Top selling products
     const topProducts = await Order.aggregate([
+        { $match: { status: 'delivered' } },
         { $unwind: '$items' },
         {
             $group: {
@@ -828,7 +850,7 @@ const execPromise = promisify(exec);
 
 export const runDatabaseSeeds = async () => {
     const logs: string[] = [];
-    
+
     try {
         logs.push("Starting Master Database Seeding Orchestration...");
         const { stdout, stderr } = await execPromise('npx tsx seeds/seed.ts');

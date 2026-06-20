@@ -1,7 +1,7 @@
 import express, {type RequestHandler } from 'express'
 import { authenticationController } from '../controllers/index.ts';
 import Authorization from '../middlewares/authMiddleware.ts'
-import { changePasswordSchema, loginSchema, registerSchema } from '../schemas/authentication.ts'
+import { changePasswordSchema, loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from '../schemas/authentication.ts'
 import validate from '../middlewares/validationRequestMiddleware.ts';
 let route = express.Router();
 //registeration route
@@ -15,4 +15,7 @@ route.put(
     validate({ bodySchema: changePasswordSchema }) as RequestHandler,
     authenticationController.changePassword as RequestHandler,
 )
+route.post('/forgot-password', validate({ bodySchema: forgotPasswordSchema }) as RequestHandler, authenticationController.forgotPassword as RequestHandler)
+route.post('/reset-password', validate({ bodySchema: resetPasswordSchema }) as RequestHandler, authenticationController.resetPassword as RequestHandler)
+
 export default route;

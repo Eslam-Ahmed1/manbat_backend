@@ -24,4 +24,13 @@ const changePasswordSchema = z
         path: ["newPassword"],
     })
 
-export { registerSchema, loginSchema, changePasswordSchema };
+const forgotPasswordSchema = z.object({
+    email: z.email("Invalid email address"),
+})
+
+const resetPasswordSchema = z.object({
+    token: z.string().min(1, "Reset token is required"),
+    newPassword: z.string().min(8, "New password must be at least 8 characters"),
+})
+
+export { registerSchema, loginSchema, changePasswordSchema, forgotPasswordSchema, resetPasswordSchema };
