@@ -11,6 +11,7 @@ export const updateUserProfile = async (userId, imageBuffer, updateData = {}) =>
     if (updateData.password) {
         delete updateData.password;
     }
+    console.log(updateData);
     if (imageBuffer) {
         try {
             const uploadResult = await uploadToCloudinary(imageBuffer, "manbut_users");
