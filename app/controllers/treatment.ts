@@ -1,6 +1,6 @@
 import { type Request,type  Response, type NextFunction } from 'express';
-import * as treatmentService from '../services/treatment.ts';
-import { appError } from '../../utils/appErrors.ts';
+import * as treatmentService from '../services/treatment.js';
+import { appError } from '../../utils/appErrors.js';
 
 export const getAllTreatments = async (req: Request, res: Response, next: NextFunction) => {
     try {

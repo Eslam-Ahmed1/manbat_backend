@@ -1,6 +1,6 @@
-import Category from "../models/categories.ts";
-import Plant from "../models/Plants.ts";
-import { appError } from "../../utils/appErrors.ts";
+import Category from "../models/categories.js";
+import Plant from "../models/Plants.js";
+import { appError } from "../../utils/appErrors.js";
 
 export const getCategories = async () => {
     return await Category.find();

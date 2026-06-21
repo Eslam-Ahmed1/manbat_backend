@@ -3,3 +3,11 @@ node_modules
 .git
 .vscode
 npm-debug.log
+logs/
+*.log
+test.rest
+mock.json
+chat_test_output.json
+docs/
+seeds/
+images/

@@ -1,13 +1,13 @@
-import {type Request,type Response,type NextFunction } from 'express';
-import * as orderService from '../services/order.ts';
-import { appError } from '../../utils/appErrors.ts';
+import { type Request, type Response, type NextFunction } from 'express';
+import * as orderService from '../services/order.js';
+import { appError } from '../../utils/appErrors.js';
 
 export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { shipping_address } = req.body;
+        const { shipping_address, phone } = req.body;
         if (!shipping_address) throw new appError("Shipping address is required", 400);
-        
-        const order = await orderService.createOrder(req.user._id as string, shipping_address);
+
+        const order = await orderService.createOrder(req.user._id as string, shipping_address, phone);
         res.status(201).json({ message: "Order placed successfully", data: order });
     } catch (error) { next(error); }
 };

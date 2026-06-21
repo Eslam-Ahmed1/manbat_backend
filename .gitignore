@@ -1,5 +1,24 @@
+# Dependencies
+node_modules/
+
+# Environment variables (do NOT ignore .env.example)
 .env
-node_modules
+.env.example
+
+# Application logs
+logs/
+*.log
+
+# Editor configurations
+.vscode/
+
+# Temp files and test outputs
+chat_test_output.json
+.DS_Store
+mock.json
+
+# Static / local assets
 images/
 test.rest
+
 

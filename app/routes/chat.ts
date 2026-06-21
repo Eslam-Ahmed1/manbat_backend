@@ -1,6 +1,6 @@
 import express, { type RequestHandler } from "express";
-import Authorization from "../middlewares/authMiddleware.ts";
-import { chatController } from "../controllers/index.ts";
+import Authorization from "../middlewares/authMiddleware.js";
+import { chatController } from "../controllers/index.js";
 const route = express.Router();
 //i will use user authorization 
 //create new chat

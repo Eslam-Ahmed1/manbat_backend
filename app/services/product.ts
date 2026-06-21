@@ -1,39 +1,99 @@
-import Product from "../models/product.ts";
+import Product from "../models/product.js";
+import ProductCategory from "../models/productCategory.js";
+import { paginate } from "../../utils/pagination.js";
+import { appError } from "../../utils/appErrors.js";
 
 export const getAllProducts = async (query: any) => {
-    // 1. Pagination settings (Default: page 1, 10 items per page)
-    const page = parseInt(query.page as string) || 1;
-    const limit = parseInt(query.limit as string) || 10;
-    const skip = (page - 1) * limit; // Math to figure out how many items to skip
-
-    // 2. Building the Database Query object
     let dbQuery: any = {};
 
-    // Search: If user typed "?search=neem", look for "neem" in the product name
+    // 1. Search (Name or Description)
     if (query.search) {
-        dbQuery.name = { $regex: query.search, $options: 'i' }; // 'i' makes it case-insensitive
+        dbQuery.$or = [
+            { name: { $regex: query.search, $options: 'i' } },
+            { description: { $regex: query.search, $options: 'i' } }
+        ];
     }
 
-    // Filtering: If user typed "?minPrice=10&maxPrice=50"
+    // 2. Category Filter
+    if (query.category) {
+        dbQuery.product_category_id = query.category;
+    }
+
+    // 3. Stock Filter (inStock=true)
+    if (query.inStock === 'true') {
+        dbQuery.quantity = { $gt: 0 };
+    }
+
+    // 4. Price Range Filter
     if (query.minPrice || query.maxPrice) {
         dbQuery.price = {};
-        if (query.minPrice) dbQuery.price.$gte = Number(query.minPrice); // Greater than or equal
-        if (query.maxPrice) dbQuery.price.$lte = Number(query.maxPrice); // Less than or equal
+        if (query.minPrice) dbQuery.price.$gte = Number(query.minPrice);
+        if (query.maxPrice) dbQuery.price.$lte = Number(query.maxPrice);
     }
 
-    // 3. Execute the query with the limit and skip applied
-    const products = await Product.find(dbQuery)
-        .skip(skip)
-        .limit(limit)
-        .populate('treatment_id', 'name'); // Get the treatment name instead of just the ID
+    // 5. Determine Sorting Option
+    let sortOption: any = { createdAt: -1 }; // Default: Newest first
+    if (query.sort) {
+        switch (query.sort) {
+            case 'price_asc':
+                sortOption = { price: 1 };
+                break;
+            case 'price_desc':
+                sortOption = { price: -1 };
+                break;
+            case 'newest':
+                sortOption = { createdAt: -1 };
+                break;
+        }
+    }
 
-    // 4. Count the total matching documents so the frontend knows how many pages exist
-    const total = await Product.countDocuments(dbQuery);
+    // 6. Execute Paginated Query
+    const result = await paginate<any>(Product, dbQuery, {
+        page: query.page,
+        limit: query.limit,
+        populate: [
+            { path: 'treatment_id', select: 'name instructions' },
+            { path: 'product_category_id', select: 'name' }
+        ],
+        sort: sortOption
+    });
 
     return {
-        products,
-        currentPage: page,
-        totalPages: Math.ceil(total / limit),
-        totalProducts: total
+        products: result.data,
+        currentPage: result.currentPage,
+        totalPages: result.totalPages,
+        totalProducts: result.totalItems
     };
+};
+
+export const getProductById = async (id: string) => {
+    const product = await Product.findById(id)
+        .populate({ path: 'treatment_id', select: 'name instructions' })
+        .populate({ path: 'product_category_id', select: 'name' });
+        
+    if (!product) throw new appError("Product not found", 404);
+    return product;
+};
+
+export const getRelatedProducts = async (id: string, limit: number = 4) => {
+    const product = await Product.findById(id);
+    if (!product) throw new appError("Product not found", 404);
+
+    // Find products in same category, excluding the current product
+    const related = await Product.find({
+        _id: { $ne: id },
+        product_category_id: product.product_category_id
+    })
+    .limit(limit)
+    .populate({ path: 'product_category_id', select: 'name' });
+
+    return related;
+};
+
+export const getFeaturedProducts = async (limit: number = 6) => {
+    // Get high-discount or recent products
+    return await Product.find()
+        .limit(limit)
+        .populate({ path: 'product_category_id', select: 'name' })
+        .sort({ discount: -1, createdAt: -1 });
 };
