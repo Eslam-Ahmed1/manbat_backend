@@ -10,11 +10,10 @@ export const getUserProfile = async (userId: string) => {
 };
 
 
-export const updateUserProfile = async (userId: string, imageBuffer: Buffer | undefined, updateData: any) => {
+export const updateUserProfile = async (userId: string, imageBuffer: Buffer | undefined, updateData: any = {}) => {
     if (updateData.password) {
         delete updateData.password;
     }
-
     if (imageBuffer) {
         try {
             const uploadResult = await uploadToCloudinary(imageBuffer, "manbut_users");
