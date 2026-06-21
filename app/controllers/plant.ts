@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import * as plantService from '../services/plant.ts';
+import * as plantService from '../services/plant.js';
 
 export const getPlants = async (req: Request, res: Response, next: NextFunction) => {
     try {

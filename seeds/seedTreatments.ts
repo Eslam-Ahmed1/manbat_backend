@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import Treatment from '../app/models/treatments.ts';
-import Disease from '../app/models/diseases.ts';
+import Treatment from '../app/models/treatments.js';
+import Disease from '../app/models/diseases.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

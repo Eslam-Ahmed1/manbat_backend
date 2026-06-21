@@ -2,7 +2,7 @@ import { array, string, ZodError } from "zod";
 import { fromError } from "zod-validation-error";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import { appError } from "../../utils/appErrors.ts";
+import { appError } from "../../utils/appErrors.js";
 import { MongoServerError } from 'mongodb'
 //this function return appError 
 function detectError(err: Error) {

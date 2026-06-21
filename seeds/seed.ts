@@ -1,13 +1,13 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
-import connectDB from '../app/loaders/mongooseLoader.ts';
+import connectDB from '../app/loaders/mongooseLoader.js';
 
-import Disease from '../app/models/diseases.ts';
-import Treatment from '../app/models/treatments.ts';
-import Product from '../app/models/product.ts';
-import ProductCategory from '../app/models/productCategory.ts';
+import Disease from '../app/models/diseases.js';
+import Treatment from '../app/models/treatments.js';
+import Product from '../app/models/product.js';
+import ProductCategory from '../app/models/productCategory.js';
 
-import { diseasesData } from './diseases.seed.ts';
+import { diseasesData } from './diseases.seed.js';
 
 // ─── Peach Scab ──────────────────────────────────────────────
 const peachScabDisease = {

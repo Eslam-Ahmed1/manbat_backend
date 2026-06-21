@@ -1,6 +1,6 @@
-import Message from "../models/messages.ts";
-import Chat from "../models/chats.ts";
-import { appError } from "../../utils/appErrors.ts";
+import Message from "../models/messages.js";
+import Chat from "../models/chats.js";
+import { appError } from "../../utils/appErrors.js";
 
 interface chatDTO {
     chat_id: string,

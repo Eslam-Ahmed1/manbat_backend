@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import ProductCategory from '../app/models/productCategory.ts';
+import ProductCategory from '../app/models/productCategory.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

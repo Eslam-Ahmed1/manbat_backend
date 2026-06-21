@@ -1,7 +1,7 @@
-import { appError } from "../../utils/appErrors.ts"
+import { appError } from "../../utils/appErrors.js"
 import express from 'express'
-import { detectError } from "../services/detectError.ts";
-import { logError } from "../../utils/errorLogger.ts";
+import { detectError } from "../services/detectError.js";
+import { logError } from "../../utils/errorLogger.js";
 
 const errorHandling = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     err = detectError(err);

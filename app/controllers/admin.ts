@@ -1,7 +1,7 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import * as adminService from '../services/admin.ts';
-import { appError } from '../../utils/appErrors.ts';
-import * as productCategoryService from '../services/productCategory.ts';
+import * as adminService from '../services/admin.js';
+import { appError } from '../../utils/appErrors.js';
+import * as productCategoryService from '../services/productCategory.js';
 
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {

@@ -1,7 +1,7 @@
-import Treatment from "../models/treatments.ts";
-import Disease from "../models/diseases.ts";
-import Product from "../models/product.ts";
-import { appError } from "../../utils/appErrors.ts";
+import Treatment from "../models/treatments.js";
+import Disease from "../models/diseases.js";
+import Product from "../models/product.js";
+import { appError } from "../../utils/appErrors.js";
 
 export type ScanDetectedEntry = {
     disease: { _id?: unknown; name: string; description?: string };
@@ -200,11 +200,11 @@ export const buildNewDiseaseScanEntry = (
 const mapProductForScan = (p: {
     _id: unknown;
     name: string;
-    description?: string;
+    description?: string | null;
     price: number;
-    discount?: number;
+    discount?: number | null;
     quantity: number;
-    image_url?: string;
+    image_url?: string | null;
 }) => {
     const discount = p.discount ?? 0;
     const discountedPrice =
@@ -262,7 +262,7 @@ export const getTreatmentsWithProductsForDiseaseIds = async (diseaseIds: string[
                 treatment: {
                     _id: treatment._id,
                     name: treatment.name,
-                    instructions: treatment.instructions,
+                    instructions: treatment.instructions ?? undefined,
                 },
                 products: products.map((p) => mapProductForScan(p)),
                 hasProducts: products.length > 0,

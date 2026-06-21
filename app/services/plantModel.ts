@@ -1,7 +1,7 @@
-import { getConfig } from "./config.ts";
-import { getScanDetectionSettings } from "./scanModelSettings.ts";
-import { HF_DISEASE_MAP } from "../config/plantModelHfMap.ts";
-import { findDiseaseByName } from "./treatment.ts";
+import { getConfig } from "./config.js";
+import { getScanDetectionSettings } from "./scanModelSettings.js";
+import { HF_DISEASE_MAP } from "../config/plantModelHfMap.js";
+import { findDiseaseByName } from "./treatment.js";
 
 export type PlantModelDiseasePrediction = {
     name: string;
@@ -214,7 +214,7 @@ export const predictWithPlantModel = async (
 
     try {
         const ext = mimeToExtension(mimeType);
-        const blob = new Blob([imageBuffer], { type: mimeType });
+        const blob = new Blob([new Uint8Array(imageBuffer)], { type: mimeType });
         const form = new FormData();
         form.append("file", blob, `scan.${ext}`);
 

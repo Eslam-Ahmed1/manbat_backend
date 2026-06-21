@@ -1,9 +1,9 @@
-import Order from "../models/orders.ts";
-import Cart from "../models/carts.ts";
-import User from "../models/user.ts";
-import Product from '../models/product.ts'
-import { appError } from "../../utils/appErrors.ts";
-import { sendOrderReceipt } from "./email.ts";
+import Order from "../models/orders.js";
+import Cart from "../models/carts.js";
+import User from "../models/user.js";
+import Product from '../models/product.js'
+import { appError } from "../../utils/appErrors.js";
+import { sendOrderReceipt } from "./email.js";
 
 export const createOrder = async (userId: string, shippingAddress: string, phone: number) => {
     const cart = await Cart.findOne({ user_id: userId });

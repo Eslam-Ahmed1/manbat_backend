@@ -1,12 +1,12 @@
 import express, { type RequestHandler } from 'express';
-import * as adminController from '../controllers/admin.ts';
-import * as configController from '../controllers/config.ts';
-import * as scanModelSettingsController from '../controllers/scanModelSettings.ts';
-import Authorization from '../middlewares/authMiddleware.ts';
-import AdminAuthorization from '../middlewares/adminMiddleware.ts';
+import * as adminController from '../controllers/admin.js';
+import * as configController from '../controllers/config.js';
+import * as scanModelSettingsController from '../controllers/scanModelSettings.js';
+import Authorization from '../middlewares/authMiddleware.js';
+import AdminAuthorization from '../middlewares/adminMiddleware.js';
 import multer, { memoryStorage } from 'multer';
-import { validateRequest } from '../middlewares/validationRequestMiddleware.ts';
-import * as adminSchemas from '../schemas/admin.ts';
+import { validateRequest } from '../middlewares/validationRequestMiddleware.js';
+import * as adminSchemas from '../schemas/admin.js';
 
 const router = express.Router();
 const upload=multer({storage:multer.memoryStorage()})

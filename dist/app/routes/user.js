@@ -1,0 +1,11 @@
+import express from 'express';
+import * as userController from '../controllers/user.js';
+import Authorization from '../middlewares/authMiddleware.js';
+import multer from 'multer';
+const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
+router.use(Authorization);
+router.get('/profile', userController.getProfile);
+router.put('/profile', upload.single("image"), userController.updateProfile);
+router.delete('/profile', userController.deleteAccount);
+export default router;

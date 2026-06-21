@@ -1,10 +1,10 @@
 import { request, type Response, type Request, type NextFunction } from 'express';
-import { authenticationService } from '../services/index.ts'
-import validate from '../middlewares/validationRequestMiddleware.ts';
-import { changePasswordSchema, loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from '../schemas/authentication.ts';
+import { authenticationService } from '../services/index.js'
+import validate from '../middlewares/validationRequestMiddleware.js';
+import { changePasswordSchema, loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from '../schemas/authentication.js';
 import z, { json } from 'zod'
 import { fromError, isZodErrorLike } from 'zod-validation-error'
-import { appError } from '../../utils/appErrors.ts';
+import { appError } from '../../utils/appErrors.js';
 const registermiddleware = validate({ bodySchema: registerSchema })
 const loginmiddleware = validate({ bodySchema: loginSchema })
 const register: typeof registermiddleware = async (req, res, next) => {

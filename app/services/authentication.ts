@@ -1,11 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import User from '../models/user.ts'
+import User from '../models/user.js'
 import JWT from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { appError } from '../../utils/appErrors.ts';
-import { sendWelcomeEmail, sendPasswordResetEmail } from './email.ts';
+import { appError } from '../../utils/appErrors.js';
+import { sendWelcomeEmail, sendPasswordResetEmail } from './email.js';
 //recieve Data transfer object for security and intention
 interface userDTO {
     name: string,

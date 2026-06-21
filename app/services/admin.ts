@@ -1,15 +1,15 @@
-import Product from "../models/product.ts";
-import Order from "../models/orders.ts";
-import User from "../models/user.ts";
-import { appError } from "../../utils/appErrors.ts";
-import { uploadToCloudinary } from "../../utils/helpFuncitons.ts";
-import Treatment from "../models/treatments.ts";
-import Disease from "../models/diseases.ts";
-import Category from "../models/categories.ts";
-import ProductCategory from "../models/productCategory.ts";
-import Article from "../models/articles.ts";
-import { paginate } from "../../utils/pagination.ts";
-import { sendOrderStatusEmail } from "./email.ts";
+import Product from "../models/product.js";
+import Order from "../models/orders.js";
+import User from "../models/user.js";
+import { appError } from "../../utils/appErrors.js";
+import { uploadToCloudinary } from "../../utils/helpFuncitons.js";
+import Treatment from "../models/treatments.js";
+import Disease from "../models/diseases.js";
+import Category from "../models/categories.js";
+import ProductCategory from "../models/productCategory.js";
+import Article from "../models/articles.js";
+import { paginate } from "../../utils/pagination.js";
+import { sendOrderStatusEmail } from "./email.js";
 
 // --- PRODUCT MANAGEMENT ---
 interface IProductData {
@@ -545,7 +545,7 @@ export const getRevenueByPeriod = async (startDate?: string, endDate?: string) =
 };
 
 // --- PLANT MANAGEMENT ---
-import Plant from "../models/Plants.ts";
+import Plant from "../models/Plants.js";
 
 interface IPlantData {
     name: string;
@@ -729,7 +729,7 @@ export const getArticleById = async (articleId: string) => {
 };
 
 // --- PLANT SCAN MANAGEMENT ---
-import PlantScan from "../models/plantScans.ts";
+import PlantScan from "../models/plantScans.js";
 
 export const getAllScans = async (query: any = {}) => {
     const result = await paginate<any>(PlantScan, {}, {

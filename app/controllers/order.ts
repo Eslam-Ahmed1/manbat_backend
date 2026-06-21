@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import * as orderService from '../services/order.ts';
-import { appError } from '../../utils/appErrors.ts';
+import * as orderService from '../services/order.js';
+import { appError } from '../../utils/appErrors.js';
 
 export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {

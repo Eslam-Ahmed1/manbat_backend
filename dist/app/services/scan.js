@@ -1,0 +1,135 @@
+import PlantScan from "../models/plantScans.js";
+import { appError } from "../../utils/appErrors.js";
+import { buildNewDiseaseScanEntry, findDiseaseByName, getTreatmentsWithProductsForDiseaseIds, optimizeScanDetectedEntries, persistNewDiseaseWithTreatment, } from "./treatment.js";
+import { detectDiseasesFromImage } from "./diseaseDetection.js";
+import { uploadToCloudinary } from "../../utils/helpFuncitons.js";
+import { paginate } from "../../utils/pagination.js";
+const analyzePlantImage = async (userId, imageBuffer, mimeType) => {
+    const startTime = Date.now();
+    console.log(`\n🔍 [SCAN] Starting — user: ${userId}`);
+    try {
+        const { diseases: detectedDiseases, meta } = await detectDiseasesFromImage(imageBuffer, mimeType);
+        if (detectedDiseases.length === 0) {
+            console.log(`   🌿 [SCAN] Plant is healthy — no diseases detected`);
+        }
+        else {
+            console.log(`   🦠 [SCAN] Detected ${detectedDiseases.length} disease(s) via ${meta.source}: ${detectedDiseases.map((d) => d.name).join(", ")}`);
+        }
+        const diseaseIds = [];
+        const treatmentsWithProducts = [];
+        for (const d of detectedDiseases) {
+            console.log(`\n   📋 [SCAN] Processing: "${d.name}"`);
+            const existingDisease = await findDiseaseByName(d.name);
+            if (!existingDisease) {
+                const { disease, treatment } = await persistNewDiseaseWithTreatment({
+                    name: d.name,
+                    description: d.description,
+                    treatment: d.treatment,
+                    instructions: d.instructions,
+                });
+                diseaseIds.push(disease._id);
+                treatmentsWithProducts.push(buildNewDiseaseScanEntry(disease, treatment));
+                console.log(`      🆕 New disease saved for future scans — response: names only, no products`);
+                continue;
+            }
+            console.log(`      ✅ Disease found in DB: "${existingDisease.name}"`);
+            diseaseIds.push(existingDisease._id);
+            const diseaseTreatments = await getTreatmentsWithProductsForDiseaseIds([
+                existingDisease._id.toString(),
+            ]);
+            const productCount = diseaseTreatments.reduce((sum, t) => sum + t.products.length, 0);
+            console.log(`      💊 Treatments in DB: ${diseaseTreatments.length}, products: ${productCount}`);
+            treatmentsWithProducts.push(...diseaseTreatments);
+        }
+        const optimizedDetected = optimizeScanDetectedEntries(treatmentsWithProducts);
+        let imageUrl = "";
+        try {
+            console.log(`\n   ⏳ [SCAN] Uploading to Cloudinary...`);
+            const t2 = Date.now();
+            const uploadResult = await uploadToCloudinary(imageBuffer, "manbut_plant_scans");
+            imageUrl = uploadResult.secure_url;
+            console.log(`   ✅ [SCAN] Cloudinary done in ${Date.now() - t2}ms`);
+        }
+        catch (error) {
+            console.error(`   ❌ [SCAN] Cloudinary upload failed:`, error);
+        }
+        const newScan = new PlantScan({
+            user_id: userId,
+            status: "completed",
+            image_url: imageUrl,
+            disease_ids: diseaseIds,
+        });
+        await newScan.save();
+        const totalProducts = optimizedDetected.reduce((s, t) => s + t.products.length, 0);
+        console.log(`\n   ✅ [SCAN] Complete — ${detectedDiseases.length} disease(s), ${optimizedDetected.length} treatment(s), ${totalProducts} product(s), source: ${meta.source} — ${Date.now() - startTime}ms\n`);
+        return {
+            scan: await PlantScan.findById(newScan._id).populate("disease_ids"),
+            detectedDiseases: optimizedDetected,
+            summary: {
+                totalDiseases: detectedDiseases.length,
+                totalTreatments: optimizedDetected.length,
+                totalAvailableProducts: totalProducts,
+                hasAllProducts: optimizedDetected.length > 0 &&
+                    optimizedDetected.every((t) => t.hasProducts),
+                detectionSource: meta.source,
+                detectionMode: meta.detectionMode,
+                customModelUsed: meta.customModelUsed,
+                geminiUsed: meta.geminiUsed,
+                plantType: meta.plantType,
+                modelConfidence: meta.modelConfidence,
+                modelDiseaseLabel: meta.modelDiseaseLabel,
+            },
+        };
+    }
+    catch (error) {
+        console.error(`   ❌ [SCAN] Failed after ${Date.now() - startTime}ms:`, error);
+        throw new appError("Failed to analyze image or save to database", 500);
+    }
+};
+const getScanHistory = async (userId, query = {}) => {
+    const result = await paginate(PlantScan, { user_id: userId }, {
+        page: query.page,
+        limit: query.limit,
+        populate: "disease_ids",
+        sort: { scan_date: -1 },
+        lean: true,
+    });
+    const data = result.data;
+    await Promise.all(data.map(async (scan) => {
+        const extractedDiseaseIds = (scan.disease_ids || [])
+            .filter((disease) => disease && disease._id)
+            .map((disease) => disease._id.toString());
+        scan.detectedDiseases =
+            extractedDiseaseIds.length > 0
+                ? await getTreatmentsWithProductsForDiseaseIds(extractedDiseaseIds)
+                : [];
+    }));
+    return {
+        scans: data,
+        currentPage: result.currentPage,
+        totalPages: result.totalPages,
+        totalScans: result.totalItems,
+    };
+};
+const getScanById = async (scanId, userId) => {
+    const scan = await PlantScan.findOne({ _id: scanId, user_id: userId }).populate("disease_ids");
+    if (!scan)
+        throw new appError("Scan not found", 404);
+    const diseaseIds = scan.disease_ids
+        .filter((d) => d && d._id)
+        .map((d) => d._id.toString());
+    const detectedDiseases = await getTreatmentsWithProductsForDiseaseIds(diseaseIds);
+    return {
+        scan,
+        detectedDiseases,
+        summary: {
+            totalDiseases: diseaseIds.length,
+            totalTreatments: detectedDiseases.length,
+            totalAvailableProducts: detectedDiseases.reduce((s, t) => s + t.products.length, 0),
+            hasAllProducts: detectedDiseases.every((t) => t.hasProducts),
+        },
+    };
+};
+/** @deprecated use getScanById — kept for route compatibility */
+const getScanHistoryByPlantId = getScanById;
+export { analyzePlantImage, getScanHistory, getScanById, getScanHistoryByPlantId };

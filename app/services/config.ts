@@ -1,4 +1,4 @@
-import AppConfig from "../models/appConfig.ts";
+import AppConfig from "../models/appConfig.js";
 
 /**
  * Get a config value with fallback priority:

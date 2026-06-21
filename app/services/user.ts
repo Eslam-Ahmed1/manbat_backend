@@ -1,6 +1,6 @@
-import User from "../models/user.ts";
-import { appError } from "../../utils/appErrors.ts";
-import { uploadToCloudinary } from "../../utils/helpFuncitons.ts";
+import User from "../models/user.js";
+import { appError } from "../../utils/appErrors.js";
+import { uploadToCloudinary } from "../../utils/helpFuncitons.js";
 
 
 export const getUserProfile = async (userId: string) => {

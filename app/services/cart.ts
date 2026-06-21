@@ -1,6 +1,6 @@
-import Cart from "../models/carts.ts";
-import Product from "../models/product.ts";
-import { appError } from "../../utils/appErrors.ts";
+import Cart from "../models/carts.js";
+import Product from "../models/product.js";
+import { appError } from "../../utils/appErrors.js";
 
 export const getCart = async (userId: string) => {
     let cart = await Cart.findOne({ user_id: userId }).populate('items.product_id');

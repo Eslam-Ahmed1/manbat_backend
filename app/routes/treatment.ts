@@ -1,5 +1,5 @@
 import express, { type RequestHandler } from 'express';
-import * as treatmentController from '../controllers/treatment.ts';
+import * as treatmentController from '../controllers/treatment.js';
 
 const router = express.Router();
 
