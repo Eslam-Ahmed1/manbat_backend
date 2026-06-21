@@ -15,7 +15,11 @@ const orderSchema = new mongoose.Schema({
     items: [orderItemSchema],
     total_amount: { type: Number, required: true },
     shipping_address: { type: String, required: true },
-    phone: { type: Number, require: true },
+    phone: {
+        type: String,
+        required: true,
+        match: [/^01[0125][0-9]{8}$/, 'Please enter a valid Egyptian phone number']
+    },
     status: {
         type: String,
         enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],

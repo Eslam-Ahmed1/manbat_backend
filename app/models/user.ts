@@ -6,7 +6,10 @@ let userSchema = new mongoose.Schema({
     role: { type: String, default: 'user', enum: ['user', 'admin'] },
     created_at: { type: Date, default: Date.now },
     address: { type: String },
-    phone: { type: String },
+    phone: {
+        type: String,
+        match: [/^01[0125][0-9]{8}$/, 'Please enter a valid Egyptian phone number']
+    },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     image_url: { type: String }
