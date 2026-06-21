@@ -7,10 +7,11 @@ export const getUserProfile = async (userId) => {
         throw new appError("User not found", 404);
     return user;
 };
-export const updateUserProfile = async (userId, imageBuffer, updateData) => {
+export const updateUserProfile = async (userId, imageBuffer, updateData = {}) => {
     if (updateData.password) {
         delete updateData.password;
     }
+    console.log(updateData);
     if (imageBuffer) {
         try {
             const uploadResult = await uploadToCloudinary(imageBuffer, "manbut_users");
