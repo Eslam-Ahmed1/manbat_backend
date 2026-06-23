@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import Order from '../app/models/orders.ts';
-import PlantScan from '../app/models/plantScans.ts';
-import User from '../app/models/user.ts';
-import Product from '../app/models/product.ts';
-import Plant from '../app/models/Plants.ts';
-import Disease from '../app/models/diseases.ts';
+import Order from '../app/models/orders.js';
+import PlantScan from '../app/models/plantScans.js';
+import User from '../app/models/user.js';
+import Product from '../app/models/product.js';
+import Plant from '../app/models/Plants.js';
+import Disease from '../app/models/diseases.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

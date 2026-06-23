@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { appError } from './appErrors.ts';
+import { appError } from './appErrors.js';
 
 // Resolve __dirname for ESM modules
 const __filename = fileURLToPath(import.meta.url);

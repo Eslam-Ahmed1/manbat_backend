@@ -1,7 +1,7 @@
-import Plant from "../models/Plants.ts";
-import Category from "../models/categories.ts";
-import { appError } from "../../utils/appErrors.ts";
-import { paginate } from "../../utils/pagination.ts";
+import Plant from "../models/Plants.js";
+import Category from "../models/categories.js";
+import { appError } from "../../utils/appErrors.js";
+import { paginate } from "../../utils/pagination.js";
 
 const buildPublicPlantQuery = async (query: any) => {
     const dbQuery: any = {};

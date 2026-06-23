@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import * as configService from '../services/config.ts';
-import { appError } from '../../utils/appErrors.ts';
+import * as configService from '../services/config.js';
+import { appError } from '../../utils/appErrors.js';
 
 export const getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -28,7 +28,7 @@ export const set = async (req: Request, res: Response, next: NextFunction) => {
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await configService.deleteConfig(req.params.key);
+        await configService.deleteConfig(req.params.key as string);
         res.status(200).json({ message: `Config '${req.params.key}' deleted. .env fallback will be used.` });
     } catch (error) { next(error); }
 };

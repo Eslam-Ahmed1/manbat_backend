@@ -1,6 +1,6 @@
 import express, { type RequestHandler } from 'express';
-import * as orderController from '../controllers/order.ts';
-import Authorization from '../middlewares/authMiddleware.ts';
+import * as orderController from '../controllers/order.js';
+import Authorization from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 

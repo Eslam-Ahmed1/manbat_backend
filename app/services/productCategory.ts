@@ -1,5 +1,5 @@
-import ProductCategory from "../models/productCategory.ts";
-import { appError } from "../../utils/appErrors.ts";
+import ProductCategory from "../models/productCategory.js";
+import { appError } from "../../utils/appErrors.js";
 
 export const getAllCategories = async () => {
     return await ProductCategory.find().sort({ name: 1 });

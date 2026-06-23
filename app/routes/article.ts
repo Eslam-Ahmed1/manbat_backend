@@ -1,5 +1,5 @@
 import express, { type RequestHandler } from 'express';
-import * as articleController from '../controllers/article.ts';
+import * as articleController from '../controllers/article.js';
 
 const router = express.Router();
 

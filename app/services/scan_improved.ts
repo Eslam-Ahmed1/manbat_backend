@@ -1,10 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import Disease from "../models/diseases.ts";
-import PlantScan from "../models/plantScans.ts";
-import { appError } from "../../utils/appErrors.ts";
-import Treatment from "../models/treatments.ts";
-import Product from "../models/product.ts";
-import { uploadToCloudinary } from "../../utils/helpFuncitons.ts";
+import Disease from "../models/diseases.js";
+import PlantScan from "../models/plantScans.js";
+import { appError } from "../../utils/appErrors.js";
+import Treatment from "../models/treatments.js";
+import Product from "../models/product.js";
+import { uploadToCloudinary } from "../../utils/helpFuncitons.js";
 
 const getAIModel = () => {
     if (!process.env.GEMINI_API_KEY) {

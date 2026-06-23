@@ -1,14 +1,15 @@
-import Product from "../models/product.ts";
-import Order from "../models/orders.ts";
-import User from "../models/user.ts";
-import { appError } from "../../utils/appErrors.ts";
-import { uploadToCloudinary } from "../../utils/helpFuncitons.ts";
-import Treatment from "../models/treatments.ts";
-import Disease from "../models/diseases.ts";
-import Category from "../models/categories.ts";
-import ProductCategory from "../models/productCategory.ts";
-import Article from "../models/articles.ts";
-import { paginate } from "../../utils/pagination.ts";
+import Product from "../models/product.js";
+import Order from "../models/orders.js";
+import User from "../models/user.js";
+import { appError } from "../../utils/appErrors.js";
+import { uploadToCloudinary } from "../../utils/helpFuncitons.js";
+import Treatment from "../models/treatments.js";
+import Disease from "../models/diseases.js";
+import Category from "../models/categories.js";
+import ProductCategory from "../models/productCategory.js";
+import Article from "../models/articles.js";
+import { paginate } from "../../utils/pagination.js";
+import { sendOrderStatusEmail } from "./email.js";
 
 // --- PRODUCT MANAGEMENT ---
 interface IProductData {
@@ -132,8 +133,28 @@ export const updateOrderStatus = async (orderId: string, status: string) => {
     const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
     if (!validStatuses.includes(status)) throw new appError(`Invalid status. Must be one of: ${validStatuses.join(', ')}`, 400);
 
-    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
+    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true }).populate('user_id');
     if (!order) throw new appError("Order not found", 404);
+
+    if (status == 'cancelled') {
+        for (const item of order.items) {
+            const product = await Product.findById(item.product_id);
+            if (!product) throw new appError(`Product not found`, 404);
+            if (product.quantity < item.quantity) throw new appError(`Insufficient stock for product: ${product.name}`, 400);
+
+            product.quantity -= item.quantity;
+            await product.save();
+        }
+    }
+    const user: any = order.user_id;
+    if (user && user.email) {
+        try {
+            await sendOrderStatusEmail(user.email, user.name, order._id.toString(), status);
+        } catch (error) {
+            console.error("Failed to send order status email:", error);
+        }
+    }
+
     return order;
 };
 
@@ -449,6 +470,7 @@ export const getAdvancedAnalytics = async () => {
 
     // Top selling products
     const topProducts = await Order.aggregate([
+        { $match: { status: 'delivered' } },
         { $unwind: '$items' },
         {
             $group: {
@@ -523,7 +545,7 @@ export const getRevenueByPeriod = async (startDate?: string, endDate?: string) =
 };
 
 // --- PLANT MANAGEMENT ---
-import Plant from "../models/Plants.ts";
+import Plant from "../models/Plants.js";
 
 interface IPlantData {
     name: string;
@@ -707,7 +729,7 @@ export const getArticleById = async (articleId: string) => {
 };
 
 // --- PLANT SCAN MANAGEMENT ---
-import PlantScan from "../models/plantScans.ts";
+import PlantScan from "../models/plantScans.js";
 
 export const getAllScans = async (query: any = {}) => {
     const result = await paginate<any>(PlantScan, {}, {
@@ -828,7 +850,7 @@ const execPromise = promisify(exec);
 
 export const runDatabaseSeeds = async () => {
     const logs: string[] = [];
-    
+
     try {
         logs.push("Starting Master Database Seeding Orchestration...");
         const { stdout, stderr } = await execPromise('npx tsx seeds/seed.ts');

@@ -1,10 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import User from '../models/user.ts'
+import User from '../models/user.js'
 import JWT from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { appError } from '../../utils/appErrors.ts';
+import { appError } from '../../utils/appErrors.js';
+import { sendWelcomeEmail, sendPasswordResetEmail } from './email.js';
 //recieve Data transfer object for security and intention
 interface userDTO {
     name: string,
@@ -25,6 +26,11 @@ const register = async (userDTO: userDTO) => {
     const hashPassword = await bcrypt.hash(password, salt);
     let newUser = new User({ name: name, email: email, password: hashPassword });
     const savedUser = await newUser.save();
+    try {
+        await sendWelcomeEmail(savedUser.email, savedUser.name);
+    } catch (error) {
+        console.error('Failed to send welcome email:', error);
+    }
     const payload = {
         _id: savedUser._id,
         name: savedUser.name,
@@ -94,4 +100,56 @@ const changePassword = async (dto: changePasswordDTO) => {
     return { message: "Password changed successfully" };
 };
 
-export { register, login, changePassword };
+const forgotPassword = async (email: string) => {
+    const user = await User.findOne({ email });
+    if (!user) {
+        throw new appError("User not found", 404);
+    }
+
+    const token = Math.floor(100000 + Math.random() * 900000).toString();
+
+    user.set('resetPasswordToken', token);
+    user.set('resetPasswordExpires', new Date(Date.now() + 3600000));
+
+    await user.save();
+
+    try {
+        await sendPasswordResetEmail(user.email, token);
+    } catch (error) {
+        user.set('resetPasswordToken', undefined);
+        user.set('resetPasswordExpires', undefined);
+        await user.save();
+        console.error('Failed to send password reset email:', error);
+        throw new appError("Failed to send password reset email", 500);
+    }
+
+    return { message: "Password reset token sent to your email" };
+};
+
+interface resetPasswordDTO {
+    token: string;
+    newPassword: string;
+}
+
+const resetPassword = async (dto: resetPasswordDTO) => {
+    const user = await User.findOne({
+        resetPasswordToken: dto.token,
+        resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+        throw new appError("Password reset token is invalid or has expired", 400);
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(dto.newPassword, salt);
+
+    user.set('resetPasswordToken', undefined);
+    user.set('resetPasswordExpires', undefined);
+
+    await user.save();
+
+    return { message: "Password has been successfully reset" };
+};
+
+export { register, login, changePassword, forgotPassword, resetPassword };

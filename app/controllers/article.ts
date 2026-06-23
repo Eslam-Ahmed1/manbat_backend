@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import * as articleService from '../services/article.ts';
+import * as articleService from '../services/article.js';
 
 export const getArticles = async (req: Request, res: Response, next: NextFunction) => {
     try {

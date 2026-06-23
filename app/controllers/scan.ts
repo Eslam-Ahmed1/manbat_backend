@@ -1,6 +1,6 @@
 import express, { type RequestHandler, type Response, type Request, type NextFunction } from 'express';
-import { analyzePlantImage, getScanHistory, getScanHistoryByPlantId } from '../services/scan.ts';
-import { appError } from '../../utils/appErrors.ts';
+import { analyzePlantImage, getScanHistory, getScanHistoryByPlantId } from '../services/scan.js';
+import { appError } from '../../utils/appErrors.js';
 const analyzePlantImageController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         if (!req.file) {

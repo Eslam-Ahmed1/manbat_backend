@@ -1,5 +1,5 @@
 import {type Request,type Response,type NextFunction } from 'express';
-import * as catalogService from '../services/catalog.ts';
+import * as catalogService from '../services/catalog.js';
 
 export const getCategories = async (req: Request, res: Response, next: NextFunction) => {
     try {

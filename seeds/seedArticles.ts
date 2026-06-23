@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import Article from '../app/models/articles.ts';
-import Plant from '../app/models/Plants.ts';
+import Article from '../app/models/articles.js';
+import Plant from '../app/models/Plants.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

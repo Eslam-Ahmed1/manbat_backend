@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import User from '../models/user.ts';
-import { appError } from '../../utils/appErrors.ts';
+import User from '../models/user.js';
+import { appError } from '../../utils/appErrors.js';
 
 const AdminAuthorization = async (req: Request, res: Response, next: NextFunction) => {
     try {

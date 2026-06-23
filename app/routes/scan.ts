@@ -26,4 +26,4 @@ const upload = multer({
 router.post('/', Authorization as RequestHandler, upload.single('plantImage'), analyzePlantImageController as RequestHandler);
 router.get('/', Authorization as RequestHandler, getScanHistoryController as RequestHandler);
 router.get('/:id', Authorization as RequestHandler, getScanHistoryByPlantIdController as RequestHandler);
-export default router;
+export default router;

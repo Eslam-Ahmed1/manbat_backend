@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import * as scanModelSettings from "../services/scanModelSettings.ts";
+import * as scanModelSettings from "../services/scanModelSettings.js";
 
 export const getSettings = async (
     req: Request,

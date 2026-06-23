@@ -8,7 +8,7 @@ import type {
 
 } from "../types/diseaseDetection.ts";
 
-import { detectDiseasesWithGemini } from "./geminiDetection.ts";
+import { detectDiseasesWithGemini } from "./geminiDetection.js";
 
 import {
 
@@ -24,19 +24,19 @@ import {
 
     type PlantModelPrediction,
 
-} from "./plantModel.ts";
+} from "./plantModel.js";
 
-import { findDiseaseByName } from "./treatment.ts";
+import { findDiseaseByName } from "./treatment.js";
 
-import Treatment from "../models/treatments.ts";
+import Treatment from "../models/treatments.js";
 
-import Product from "../models/product.ts";
+import Product from "../models/product.js";
 
-import { getScanDetectionSettings } from "./scanModelSettings.ts";
+import { getScanDetectionSettings } from "./scanModelSettings.js";
 
-import { appError } from "../../utils/appErrors.ts";
+import { appError } from "../../utils/appErrors.js";
 
-import type { ScanDetectionMode } from "../types/scanDetectionSettings.ts";
+import type { ScanDetectionMode } from "../types/scanDetectionSettings.js";
 
 
 

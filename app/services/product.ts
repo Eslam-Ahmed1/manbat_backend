@@ -1,7 +1,7 @@
-import Product from "../models/product.ts";
-import ProductCategory from "../models/productCategory.ts";
-import { paginate } from "../../utils/pagination.ts";
-import { appError } from "../../utils/appErrors.ts";
+import Product from "../models/product.js";
+import ProductCategory from "../models/productCategory.js";
+import { paginate } from "../../utils/pagination.js";
+import { appError } from "../../utils/appErrors.js";
 
 export const getAllProducts = async (query: any) => {
     let dbQuery: any = {};

@@ -1,6 +1,6 @@
 import {type Request,type Response, type NextFunction } from 'express';
-import * as cartService from '../services/cart.ts';
-import { appError } from '../../utils/appErrors.ts';
+import * as cartService from '../services/cart.js';
+import { appError } from '../../utils/appErrors.js';
 
 export const getCart = async (req: Request, res: Response, next: NextFunction) => {
     try {

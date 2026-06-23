@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Disease from "./diseases.ts";
+import Disease from "./diseases.js";
 
 let treatmentSchema = new mongoose.Schema({
     name: {

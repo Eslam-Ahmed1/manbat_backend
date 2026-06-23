@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Disease from '../app/models/diseases.ts';
+import Disease from '../app/models/diseases.js';
 
 // ============================================================
 // PLANT DISEASES SEED - 150+ diseases across all categories
@@ -180,7 +180,7 @@ export const seedDiseases = async () => {
 
 // Run standalone only when executed directly
 if (process.argv[1].includes('diseases.seed')) {
-  const connectDB = (await import('../app/loaders/mongooseLoader.ts')).default;
+  const connectDB = (await import('../app/loaders/mongooseLoader.js')).default;
   await connectDB();
   await seedDiseases();
   await mongoose.disconnect();

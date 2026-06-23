@@ -1,6 +1,6 @@
-import PlantScan from "../models/plantScans.ts";
+import PlantScan from "../models/plantScans.js";
 
-import { appError } from "../../utils/appErrors.ts";
+import { appError } from "../../utils/appErrors.js";
 
 import { validateAndVerifyImage } from "./imageValidation.ts";
 
@@ -16,13 +16,13 @@ import {
 
     persistNewDiseaseWithTreatment,
 
-} from "./treatment.ts";
+} from "./treatment.js";
 
-import { detectDiseasesFromImage } from "./diseaseDetection.ts";
+import { detectDiseasesFromImage } from "./diseaseDetection.js";
 
-import { uploadToCloudinary } from "../../utils/helpFuncitons.ts";
+import { uploadToCloudinary } from "../../utils/helpFuncitons.js";
 
-import { paginate } from "../../utils/pagination.ts";
+import { paginate } from "../../utils/pagination.js";
 
 
 

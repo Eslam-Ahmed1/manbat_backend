@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import User from '../app/models/user.ts';
+import User from '../app/models/user.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 

@@ -1,5 +1,5 @@
-import Article from "../models/articles.ts";
-import { appError } from "../../utils/appErrors.ts";
+import Article from "../models/articles.js";
+import { appError } from "../../utils/appErrors.js";
 
 const buildPublicArticleQuery = (query: any) => {
     const dbQuery: any = { status: 'published' };

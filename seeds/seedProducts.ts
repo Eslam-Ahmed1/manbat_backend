@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import Product from '../app/models/product.ts';
-import Treatment from '../app/models/treatments.ts';
-import ProductCategory from '../app/models/productCategory.ts';
+import Product from '../app/models/product.js';
+import Treatment from '../app/models/treatments.js';
+import ProductCategory from '../app/models/productCategory.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

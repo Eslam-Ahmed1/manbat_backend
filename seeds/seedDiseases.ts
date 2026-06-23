@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Disease from '../app/models/diseases.ts';
+import Disease from '../app/models/diseases.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

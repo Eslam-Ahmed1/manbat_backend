@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { appError } from "../../utils/appErrors.ts";
-import { getConfig } from "./config.ts";
-import type { DetectedDiseaseInput } from "../types/diseaseDetection.ts";
+import { appError } from "../../utils/appErrors.js";
+import { getConfig } from "./config.js";
+import type { DetectedDiseaseInput } from "../types/diseaseDetection.js";
 
 const DISEASE_DETECTION_PROMPT = `
 Analyze this plant image and identify any diseases present. Return a strictly formatted JSON array of disease objects.

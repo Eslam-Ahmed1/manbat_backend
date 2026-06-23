@@ -1,24 +1,24 @@
 import 'dotenv/config';
-import * as errorLoader from './errorLoader.ts'
+import * as errorLoader from './errorLoader.js'
 import express from 'express'
 import CORS from 'cors'
-import { requestLogger } from '../middlewares/requestLogger.ts';
-import AuthenticationRoute from '../routes/authentication.ts';
-import ChatRoute from '../routes/chat.ts';
-import ScanRoute from '../routes/scan.ts';
-import TreatmentRoute from '../routes/treatment.ts';
-import CatalogRoute from '../routes/catalog.ts';
-import CartRoute from '../routes/cart.ts';
-import OrderRoute from '../routes/order.ts';
-import { errorHandling } from '../controllers/errorHandling.ts';
-import conectDB from './mongooseLoader.ts'
-import ProductRoute from '../routes/product.ts';
-import UserRoute from '../routes/user.ts';
-import AdminRoute from '../routes/admin.ts';
-import ArticleRoute from '../routes/article.ts';
-import PlantRoute from '../routes/plant.ts';
-import { registerGlobalErrorHandlers } from '../../utils/errorLogger.ts';
-import { syncConfigToEnv } from '../services/config.ts';
+import { requestLogger } from '../middlewares/requestLogger.js';
+import AuthenticationRoute from '../routes/authentication.js';
+import ChatRoute from '../routes/chat.js';
+import ScanRoute from '../routes/scan.js';
+import TreatmentRoute from '../routes/treatment.js';
+import CatalogRoute from '../routes/catalog.js';
+import CartRoute from '../routes/cart.js';
+import OrderRoute from '../routes/order.js';
+import { errorHandling } from '../controllers/errorHandling.js';
+import conectDB from './mongooseLoader.js'
+import ProductRoute from '../routes/product.js';
+import UserRoute from '../routes/user.js';
+import AdminRoute from '../routes/admin.js';
+import ArticleRoute from '../routes/article.js';
+import PlantRoute from '../routes/plant.js';
+import { registerGlobalErrorHandlers } from '../../utils/errorLogger.js';
+import { syncConfigToEnv } from '../services/config.js';
 //------
 let serverSetup = (async () => {
     registerGlobalErrorHandlers();
@@ -28,7 +28,7 @@ let serverSetup = (async () => {
     await syncConfigToEnv();
     app.use(express.json());
     app.use(CORS());
-    app.use(requestLogger);
+    app.use(requestLogger as express.RequestHandler);
     app.use('/api/authentication', AuthenticationRoute)
     app.use('/api/AI_chat', ChatRoute)
     app.use('/api/scans', ScanRoute)

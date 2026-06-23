@@ -1,5 +1,5 @@
-import { getConfig, setConfig } from "./config.ts";
-import { appError } from "../../utils/appErrors.ts";
+import { getConfig, setConfig } from "./config.js";
+import { appError } from "../../utils/appErrors.js";
 import type {
     ImageValidationSettings,
     ScanDetectionMode,

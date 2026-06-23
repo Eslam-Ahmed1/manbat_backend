@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import * as productService from '../services/product.ts';
-import * as productCategoryService from '../services/productCategory.ts';
+import * as productService from '../services/product.js';
+import * as productCategoryService from '../services/productCategory.js';
 
 export const getProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {

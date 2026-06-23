@@ -2,7 +2,7 @@
 import z, { ZodType } from 'zod'
 import * as express from 'express'
 import { fromError, fromZodError, isZodErrorLike } from 'zod-validation-error';
-import { appError } from '../../utils/appErrors.ts';
+import { appError } from '../../utils/appErrors.js';
 
 //zodType<T> validate that only schema type accepted in function
 interface schemas<P, B, Q> {
