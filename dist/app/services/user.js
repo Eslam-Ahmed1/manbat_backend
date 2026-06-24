@@ -11,7 +11,6 @@ export const updateUserProfile = async (userId, imageBuffer, updateData = {}) =>
     if (updateData.password) {
         delete updateData.password;
     }
-    console.log(updateData);
     if (imageBuffer) {
         try {
             const uploadResult = await uploadToCloudinary(imageBuffer, "manbut_users");
@@ -22,6 +21,8 @@ export const updateUserProfile = async (userId, imageBuffer, updateData = {}) =>
             throw new appError("Failed to upload image to Cloudinary", 500);
         }
     }
+    else
+        updateData.image_url = "";
     const user = await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true }).select('-password');
     if (!user)
         throw new appError("User not found", 404);

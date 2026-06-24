@@ -23,6 +23,7 @@ export const updateUserProfile = async (userId: string, imageBuffer: Buffer | un
             throw new appError("Failed to upload image to Cloudinary", 500);
         }
     }
+    else  updateData.image_url ="";
 
     const user = await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true }).select('-password');
     if (!user) throw new appError("User not found", 404);

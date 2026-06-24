@@ -142,7 +142,7 @@ export const updateOrderStatus = async (orderId: string, status: string) => {
             if (!product) throw new appError(`Product not found`, 404);
             if (product.quantity < item.quantity) throw new appError(`Insufficient stock for product: ${product.name}`, 400);
 
-            product.quantity -= item.quantity;
+            product.quantity += item.quantity;
             await product.save();
         }
     }
