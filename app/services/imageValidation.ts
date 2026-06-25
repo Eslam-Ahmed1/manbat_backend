@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { appError } from "../../utils/appErrors.ts";
 import { getConfig } from "./config.ts";
 import { getImageValidationSettings } from "./scanModelSettings.ts";
+import logger from "../../utils/logger.js";
 
 // ─── Types ───────────────────────────────────────────────────────────
 type PlantCheckResult = {
@@ -102,7 +103,7 @@ export const verifyPlantImage = async (
     const apiKey = await getConfig("GEMINI_API_KEY");
     if (!apiKey) {
         // If Gemini is not configured, skip the check gracefully
-        console.warn("   ⚠️ [VALIDATE] GEMINI_API_KEY missing — skipping plant pre-check");
+        logger.warn("⚠️ [VALIDATE] GEMINI_API_KEY missing — skipping plant pre-check");
         return { isPlant: true, confidence: 1, reason: "Skipped: no API key" };
     }
 
@@ -119,7 +120,7 @@ export const verifyPlantImage = async (
         },
     };
 
-    console.log("   🔍 [VALIDATE] Checking if image is a plant...");
+    logger.debug("   🔍 [VALIDATE] Checking if image is a plant...");
     const t0 = Date.now();
 
     try {
@@ -127,7 +128,7 @@ export const verifyPlantImage = async (
         const responseText = result.response.text();
         const parsed = JSON.parse(responseText) as PlantCheckResult;
 
-        console.log(
+        logger.debug(
             `   ${parsed.isPlant ? "✅" : "❌"} [VALIDATE] Plant check: isPlant=${parsed.isPlant}, confidence=${parsed.confidence} — ${Date.now() - t0}ms`,
         );
 
@@ -145,7 +146,7 @@ export const verifyPlantImage = async (
         if (error instanceof appError) throw error;
 
         // Gemini failure — log but don't block the user
-        console.error(`   ⚠️ [VALIDATE] Plant check failed, allowing through:`, error);
+        logger.error(`⚠️ [VALIDATE] Plant check failed, allowing through:`, error);
         return { isPlant: true, confidence: 1, reason: "Pre-check failed, allowed through" };
     }
 };
@@ -166,15 +167,15 @@ export const validateAndVerifyImage = async (
     const settings = await getImageValidationSettings();
 
     if (!settings.enabled) {
-        console.log("   ⏭️ [VALIDATE] Image validation disabled by admin — skipping");
+        logger.debug("⏭️ [VALIDATE] Image validation disabled by admin — skipping");
         return;
     }
 
     // Layer 1: File validation (always runs when enabled — it's free)
     validateImageFile(imageBuffer, mimeType);
-    console.log("   ✅ [VALIDATE] Layer 1 passed: valid image file");
+    logger.debug("✅ [VALIDATE] Layer 1 passed: valid image file");
 
     // Layer 2: Gemini plant check
     await verifyPlantImage(imageBuffer, mimeType, settings.confidenceThreshold);
-    console.log("   ✅ [VALIDATE] Layer 2 passed: image is a plant");
+    logger.debug("✅ [VALIDATE] Layer 2 passed: image is a plant");
 };
